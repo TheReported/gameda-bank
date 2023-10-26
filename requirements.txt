@@ -1,4 +1,4 @@
 django
 requests
 prettyconf
-django-localflavor
+pillow

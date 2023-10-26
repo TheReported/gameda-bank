@@ -5,8 +5,14 @@ from .models import Profile
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
+    dni = forms.CharField(max_length=9)
     password = forms.CharField(widget=forms.PasswordInput)
+
+    def check_dni(self):
+        cd = self.cleaned_data
+
+        if cd['dni']:
+            ...
 
 
 class UserEditForm(forms.ModelForm):
@@ -27,7 +33,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'email']
+        fields = ['dni', 'first_name', 'email']
 
     def clean_password2(self):
         cd = self.cleaned_data
