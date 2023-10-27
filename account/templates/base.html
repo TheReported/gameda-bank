@@ -7,6 +7,7 @@
 </head>
 <body>
     <div id="header">
+        <span><img src="{% static "img/logo.png" %}" alt="" class="logo" style="width: 30px"></span>
         <span class="logo">Gameda</span>
         {% if request.user.is_authenticated %}
             <ul class="menu">
@@ -26,13 +27,23 @@
         {% endif %}
         <span class="user">
             {% if request.user.is_authenticated %}
-                Hello {{request.user.fisrt_name|default:request.user.username}},
+                <a href="{% url "edit" %}">Hello {{request.user.fisrt_name|default:request.user.username}},</a>
                 <a href="{% url "logout" %}">Logout</a>
             {% else %}
             <a href="{% url "login" %}">Login</a>
             {% endif %}
         </span>
     </div>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {{ message|safe }}
+                    <a href="{% url "activity" %}" class="close">x</a>
+                </li>
+            {% endfor %}
+        </ul>
+{% endif %}
     <div id="content">
         {% block content %}
         {% endblock %}

@@ -2,7 +2,11 @@
 {% block title %}Edit your account{% endblock %}
 {% block content %}
     <h1>Edit your account</h1>
-    <p>You can edit your account using the following form:</p>
+    <p>You can <a href="{% url "password_change" %}">change your password</a> but also you can edit your account using the following form:</p>
+    {% load thumbnail %}
+    {% if user.profile.photo %}
+        <img src="{{ user.profile.photo.url }}">
+    {% endif %}
     <form method="post" enctype="multipart/form-data">
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
