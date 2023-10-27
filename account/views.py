@@ -12,11 +12,11 @@ def user_login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(request, username=cd['username'], password=cd['password'])
+            user = authenticate(request, username=cd['dni'], password=cd['password'])
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponse('AuthenticatedSuccessfully')
+                return HttpResponse('Authenticated Successfully')
             else:
                 return HttpResponse('Disabled account')
         else:

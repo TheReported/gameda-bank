@@ -1,18 +1,21 @@
-from django import forms
-from django.contrib.auth.models import User
+import re
 
-from .models import Profile
+from django import forms
+
+from .models import Profile, User
 
 
 class LoginForm(forms.Form):
-    dni = forms.CharField(max_length=9)
+    dni = forms.CharField(label="DNI", widget=forms.TextInput, max_length=9)
     password = forms.CharField(widget=forms.PasswordInput)
 
     def check_dni(self):
+        dni_regex = "[0-9]{8}[A-Z]"
         cd = self.cleaned_data
 
-        if cd['dni']:
-            ...
+        if re.match(dni_regex, cd['dni']) is None:
+            raise forms.ValidationError('Please insert a valid DNI')
+        return cd['dni']
 
 
 class UserEditForm(forms.ModelForm):
@@ -24,7 +27,7 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['date_of_bitrth', 'photo']
+        fields = ['date_of_birth', 'photo']
 
 
 class UserRegistrationForm(forms.ModelForm):
