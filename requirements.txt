@@ -3,3 +3,5 @@ requests
 prettyconf
 pillow
 easy-thumbnails
+psycopg2-binary
+redis
