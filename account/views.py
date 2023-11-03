@@ -1,11 +1,18 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 
-from .forms import LoginForm, ProfileEditForm, UserEditForm, UserRegistrationForm
-from .models import Profile
+from .forms import (
+    BankAccountForm,
+    LoginForm,
+    ProfileEditForm,
+    UserEditForm,
+    UserRegistrationForm,
+)
+from .models import BankAccount, Profile
 
 
 def user_login(request):
@@ -17,7 +24,7 @@ def user_login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponse('Authenticated Successfully')
+                return HttpResponseRedirect('Authenticated Succesfully')
             else:
                 return HttpResponse('Disabled account')
         else:
@@ -72,3 +79,10 @@ def edit(request):
     return render(
         request, 'account/edit.html', {'user_form': user_form, 'profile_form': profile_form}
     )
+
+
+@login_required
+def create_bank_account(request):
+    bank_account_form = BankAccountForm(request.POST)
+
+    return render(request, 'account/bank_account.html', {'bank_account_form': bank_account_form})

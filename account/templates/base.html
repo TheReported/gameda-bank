@@ -15,7 +15,7 @@
                     <a href="{% url "activity" %}">Activity</a>
                 </li>
                 <li {% if section == "images" %}class="selected"{% endif %}>
-                    <a href="#">Accounts</a>
+                    <a href="{% url "bank_account" %}">Accounts</a>
                 </li>
                 <li {% if section == "people" %}class="selected"{% endif %}>
                     <a href="#">Transferences</a>
@@ -27,10 +27,13 @@
         {% endif %}
         <span class="user">
             {% if request.user.is_authenticated %}
-                <a href="{% url "edit" %}">Hello {{request.user.fisrt_name|default:request.user.username}},</a>
+                <a href="{% url "edit" %}">Hello {{request.user.fisrt_name|default:request.user.username}} 
+                        <img src="{% if user.profile.photo %} {{ user.profile.photo.url }} {% else %} {% static "img/avatar.png" %}{% endif %}" class='profile-photo'>
+                , </a>
+            
                 <a href="{% url "logout" %}">Logout</a>
             {% else %}
-            <a href="{% url "login" %}">Login</a>
+                <a href="{% url "login" %}">Login</a>
             {% endif %}
         </span>
     </div>

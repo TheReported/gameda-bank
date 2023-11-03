@@ -1,10 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Profile
+from .models import BankAccount, Profile
 
 
 class LoginForm(forms.Form):
+    username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 
@@ -39,6 +40,12 @@ class UserRegistrationForm(forms.ModelForm):
         if User.objects.filter(email=data).exists():
             raise forms.ValidationError('Email already in use.')
         return data
+
+
+class BankAccountForm(forms.ModelForm):
+    class Meta:
+        model = BankAccount
+        fields = ['alias']
 
     # def check_dni(self):
     #     dni_regex = "[0-9]{8}[A-Z]"

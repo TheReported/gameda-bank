@@ -213,3 +213,8 @@ img.user-detail {
     font-style:italic;
     color:#ccc;
 }
+
+.profile-photo {
+    border-radius: 20px;
+    width: 30px;
+}
