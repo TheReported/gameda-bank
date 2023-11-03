@@ -1,4 +1,16 @@
 {% extends "base.html" %}
 {% block title %}My bank accounts{% endblock %}
 {% block content %}
+    <h1>My bank accounts</h1>
+    
+    {% for account in accounts %}
+        <div class="account">
+            <p>
+                <a href="#">{{ account.alias }}</a> - {{account.balance}}€
+            </p>
+        </div>
+    {% empty %}
+        <p>There are no accounts yet.</p>
+    {% endfor %}
+
 {% endblock %}

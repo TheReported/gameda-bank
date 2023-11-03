@@ -1,9 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 
 from .forms import (
     BankAccountForm,
@@ -83,6 +82,18 @@ def edit(request):
 
 @login_required
 def create_bank_account(request):
-    bank_account_form = BankAccountForm(request.POST)
-
-    return render(request, 'account/bank_account.html', {'bank_account_form': bank_account_form})
+    accounts = BankAccount.objects.filter(user=request.user)
+    if request.method == 'POST':
+        bank_account_form = BankAccountForm(request.POST)
+        if bank_account_form.is_valid():
+            bank_account_form.save()
+            messages.success(request, 'Create a bank account successfully')
+        else:
+            messages.error(request, 'Error creating a bank account')
+    else:
+        bank_account_form = BankAccountForm()
+    return render(
+        request,
+        'account/bank_account.html',
+        {'bank_account_form': bank_account_form, 'accounts': accounts},
+    )

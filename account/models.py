@@ -15,7 +15,7 @@ class BankAccount(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='accounts', on_delete=models.CASCADE
     )
-    alias = models.TextField(max_length=40, blank=False, null=False)
+    alias = models.CharField(max_length=40, blank=False, null=False)
     balance = models.DecimalField(decimal_places=2, default=0, max_digits=12)
     status = models.CharField(max_length=2, choices=CHOICES, default=ACTIVE)
 
