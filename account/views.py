@@ -4,14 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms import (
-    BankAccountForm,
-    LoginForm,
-    ProfileEditForm,
-    UserEditForm,
-    UserRegistrationForm,
-)
-from .models import BankAccount, Profile
+from bank_account.models import BankAccount
+
+from .forms import LoginForm, ProfileEditForm, UserEditForm, UserRegistrationForm
+from .models import Profile
 
 
 def user_login(request):
@@ -35,7 +31,8 @@ def user_login(request):
 
 @login_required
 def activity(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    accounts = BankAccount.objects.filter(user=request.user)
+    return render(request, 'account/dashboard.html', {'section': 'dashboard', 'accounts': accounts})
 
 
 def show_main(request):
@@ -77,23 +74,4 @@ def edit(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
     return render(
         request, 'account/edit.html', {'user_form': user_form, 'profile_form': profile_form}
-    )
-
-
-@login_required
-def create_bank_account(request):
-    accounts = BankAccount.objects.filter(user=request.user)
-    if request.method == 'POST':
-        bank_account_form = BankAccountForm(request.POST)
-        if bank_account_form.is_valid():
-            bank_account_form.save()
-            messages.success(request, 'Create a bank account successfully')
-        else:
-            messages.error(request, 'Error creating a bank account')
-    else:
-        bank_account_form = BankAccountForm()
-    return render(
-        request,
-        'account/bank_account.html',
-        {'bank_account_form': bank_account_form, 'accounts': accounts},
     )

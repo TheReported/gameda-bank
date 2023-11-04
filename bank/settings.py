@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'account.apps.AccountConfig',
     'card.apps.CardConfig',
+    'bank_account.apps.BankAccountConfig',
 ]
 
 MIDDLEWARE = [
