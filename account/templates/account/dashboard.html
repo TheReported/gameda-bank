@@ -3,5 +3,8 @@
 {% block content %}
     <h1>Activity</h1>
     <p>Welcome to your activity.</p>
+    <h3>My bank accounts</h3>
     {% include 'bank_account/list.html' %}
+    <h3>My cards</h3>
+    {%include "card/list.html"%}
 {% endblock %}

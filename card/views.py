@@ -11,7 +11,7 @@ from .models import Card
 @login_required
 def card_detail(request, card_id):
     card = get_object_or_404(Card, id=card_id)
-    return render(request, "cards/detail.html", {"card": card})
+    return render(request, "card/detail.html", {"card": card})
 
 
 @login_required
@@ -21,7 +21,7 @@ def display_card(request):
     return render(
         request,
         'display_card.html',
-        {'cards': cards},
+        {'section': 'cards', 'cards': cards},
     )
 
 
@@ -39,4 +39,4 @@ def create_card(request):
     else:
         card_form = CardForm()
 
-    return render(request, "cards/create.html", {"card_form": card_form, "cards": cards})
+    return render(request, "card/create.html", {"card_form": card_form, "cards": cards})

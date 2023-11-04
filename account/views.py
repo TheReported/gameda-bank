@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from bank_account.models import BankAccount
+from card.models import Card
 
 from .forms import LoginForm, ProfileEditForm, UserEditForm, UserRegistrationForm
 from .models import Profile
@@ -32,7 +33,12 @@ def user_login(request):
 @login_required
 def activity(request):
     accounts = BankAccount.objects.filter(user=request.user)
-    return render(request, 'account/dashboard.html', {'section': 'dashboard', 'accounts': accounts})
+    cards = Card.objects.filter(bank_account=accounts.first())
+    return render(
+        request,
+        'account/dashboard.html',
+        {'section': 'dashboard', 'accounts': accounts, 'cards': cards},
+    )
 
 
 def show_main(request):

@@ -11,8 +11,8 @@ def display(request):
     accounts = BankAccount.objects.filter(user=request.user)
     return render(
         request,
-        'display_bank.html',
-        {'accounts': accounts},
+        'display_bank_account.html',
+        {'section': 'accounts', 'accounts': accounts},
     )
 
 
@@ -33,5 +33,5 @@ def create(request):
     return render(
         request,
         'bank_account/create.html',
-        {'bank_account_form': bank_account_form},
+        {'section': 'accounts', 'bank_account_form': bank_account_form},
     )
