@@ -1,0 +1,12 @@
+{% block content %}
+    {% for card in cards %}
+        <div class="card">
+            <p>
+                <a href="#">{{ card.alias }}</a>
+            </p>
+        </div>
+    {% empty %}
+        <p>There are no cards created yet.</p>
+    {% endfor %}
+
+{% endblock %}

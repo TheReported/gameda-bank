@@ -11,7 +11,9 @@ PIN_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 class Card(models.Model):
     id = models.AutoField(primary_key=True)
-    bank_account = models.ForeignKey(BankAccount, related_name='cards', on_delete=models.CASCADE)
+    bank_account = models.ForeignKey(
+        BankAccount, related_name='cards', on_delete=models.CASCADE
+    )
 
     alias = models.CharField(max_length=40, blank=False, null=False)
     status = models.CharField(max_length=2, choices=CHOICES, default=ACTIVE)

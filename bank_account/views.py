@@ -11,7 +11,7 @@ def display(request):
     accounts = BankAccount.objects.filter(user=request.user)
     return render(
         request,
-        'dashboard.html',
+        'display_bank.html',
         {'accounts': accounts},
     )
 

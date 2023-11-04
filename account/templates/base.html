@@ -20,8 +20,8 @@
                 <li {% if section == "people" %}class="selected"{% endif %}>
                     <a href="#">Transferences</a>
                 </li>
-                <li {% if section == "people" %}class="selected"{% endif %}>
-                    <a href="#">Cards</a>
+                <li {% if section == "card" %}class="selected"{% endif %}>
+                    <a href="{% url "card:init" %}">Cards</a>
                 </li>
             </ul>
         {% endif %}

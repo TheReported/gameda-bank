@@ -9,4 +9,5 @@ urlpatterns = [
     path('edit/', views.edit, name='edit'),
     path('register/', views.register, name='register'),
     path('bank_account/', include('bank_account.urls'), name='bank_account'),
+    path("card/", include("card.urls"), name="card"),
 ]
