@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Create bank account{% endblock %}
+{% block content %}
+    <h2>Create a new account</h2>
+    <form action="{% url "bank_account:create" %}" method="post">
+        {{ bank_account_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Create"></p>
+    </form>
+{% endblock %}

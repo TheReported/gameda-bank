@@ -7,22 +7,24 @@ from .models import BankAccount
 
 
 @login_required
-def display_bank_account(request):
+def display(request):
     accounts = BankAccount.objects.filter(user=request.user)
     return render(
         request,
-        'bank_account/list.html',
+        'dashboard.html',
         {'accounts': accounts},
     )
 
 
 @login_required
-def create_bank_account(request):
-    accounts = BankAccount.objects.filter(user=request.user)
+def create(request):
     if request.method == 'POST':
         bank_account_form = BankAccountForm(request.POST)
         if bank_account_form.is_valid():
-            bank_account_form.save()
+            bank_account = bank_account_form.save(commit=False)
+            bank_account.user = request.user
+            bank_account.save()
+
             messages.success(request, 'Create a bank account successfully')
         else:
             messages.error(request, 'Error creating a bank account')
@@ -30,6 +32,6 @@ def create_bank_account(request):
         bank_account_form = BankAccountForm()
     return render(
         request,
-        'dashboard.html',
-        {'bank_account_form': bank_account_form, 'accounts': accounts},
+        'bank_account/create.html',
+        {'bank_account_form': bank_account_form},
     )

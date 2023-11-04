@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% block title %}My bank accounts{% endblock %}
+{% block title %}{{ section.title }}{% endblock %}
 {% block content %}
+    <h1>My bank accounts</h1>
+    <p>You can create a new <a href="{% url 'bank_account:create' %}"> bank account</a></p>
     {% include 'bank_account/list.html' %}
 {% endblock %}
