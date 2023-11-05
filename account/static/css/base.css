@@ -218,3 +218,8 @@ img.user-detail {
     border-radius: 20px;
     width: 30px;
 }
+
+.profile-photo-edit {
+    border-radius: 20px;
+    width: 200px;
+}
