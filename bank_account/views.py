@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from account.status import ACTIVE
 from card.models import Card
 
-from .forms import BankAccountForm
+from .forms import BankAccountEditForm, BankAccountForm
 from .models import BankAccount
 
 
@@ -29,7 +29,7 @@ def create(request):
             bank_account.save()
 
             messages.success(request, 'Create a bank account successfully')
-            return redirect('bank_account:create_done')
+            return redirect('bank_account:display')
 
         else:
             messages.error(request, 'Error creating a bank account')
@@ -61,3 +61,27 @@ def detail(request, id):
             'bank_account/detail.html',
             {'section': 'accounts', 'bank_account': bank_account, 'cards': cards},
         )
+
+
+@login_required
+def edit(request, id):
+    bank_account = get_object_or_404(BankAccount, id=id, status=ACTIVE)
+    if request.method == 'POST':
+        bank_account_form = BankAccountEditForm(instance=bank_account, data=request.POST)
+        if bank_account_form.is_valid():
+            bank_account_form.save()
+            messages.success(request, 'Edit a bank account successfully')
+            return redirect('bank_account:display')
+        else:
+            messages.error(request, 'Error editing a bank account')
+    else:
+        bank_account_form = BankAccountEditForm(instance=bank_account)
+    return render(
+        request,
+        'bank_account/edit.html',
+        {
+            'section': 'accounts',
+            'bank_account_edit_form': bank_account_form,
+            'bank_account': bank_account,
+        },
+    )

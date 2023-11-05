@@ -7,3 +7,9 @@ class BankAccountForm(forms.ModelForm):
     class Meta:
         model = BankAccount
         fields = ['alias']
+
+
+class BankAccountEditForm(forms.ModelForm):
+    class Meta:
+        model = BankAccount
+        fields = ['alias']
