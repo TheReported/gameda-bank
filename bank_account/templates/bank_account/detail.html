@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}{{ bank_account.alias }}{% endblock %}
+{% block content %}
+    <h1>{{bank_account.alias}} - {{bank_account.code}}</h1>
+    <h3>My cards</h3>
+    {% include "card/list.html" %}
+    {% csrf_token %}
+{% endblock %}

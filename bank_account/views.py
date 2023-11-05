@@ -1,6 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
+
+from account.status import ACTIVE
+from card.models import Card
 
 from .forms import BankAccountForm
 from .models import BankAccount
@@ -26,6 +29,8 @@ def create(request):
             bank_account.save()
 
             messages.success(request, 'Create a bank account successfully')
+            return redirect('bank_account:create_done')
+
         else:
             messages.error(request, 'Error creating a bank account')
     else:
@@ -35,3 +40,24 @@ def create(request):
         'bank_account/create.html',
         {'section': 'accounts', 'bank_account_form': bank_account_form},
     )
+
+
+@login_required
+def create_done(request):
+    return render(
+        request,
+        'bank_account/done.html',
+        {'section': 'accounts'},
+    )
+
+
+@login_required
+def detail(request, id):
+    bank_account = get_object_or_404(BankAccount, id=id, status=ACTIVE)
+    if bank_account:
+        cards = Card.objects.filter(bank_account=bank_account)
+        return render(
+            request,
+            'bank_account/detail.html',
+            {'section': 'accounts', 'bank_account': bank_account, 'cards': cards},
+        )

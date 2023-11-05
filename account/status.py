@@ -1,9 +1,9 @@
-ACTIVE = 'AC', 'Active'
-BLOCKED = 'BL', 'Blocked'
-DISCHARGE = 'DI', 'Discharge'
+ACTIVE = 'AC'
+BLOCKED = 'BL'
+DISCHARGE = 'DI'
 
 CHOICES = (
-    ACTIVE,
-    BLOCKED,
-    DISCHARGE,
+    (ACTIVE, 'Active'),
+    (BLOCKED, 'Blocked'),
+    (DISCHARGE, 'Discharge'),
 )

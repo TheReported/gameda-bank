@@ -1,9 +1,8 @@
 {% block content %}
-    
     {% for account in accounts %}
         <div class="account">
             <p>
-                <a href="#">{{ account.alias }}</a> - {{account.balance}}€
+                <a href="{% url "bank_account:detail" account.id %}">{{ account.alias }}</a> - {{account.balance}}€
             </p>
         </div>
     {% empty %}

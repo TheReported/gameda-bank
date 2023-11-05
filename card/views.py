@@ -16,8 +16,7 @@ def card_detail(request, card_id):
 
 @login_required
 def display_card(request):
-    bank_account = BankAccount.objects.filter(user=request.user).first()
-    cards = Card.objects.filter(bank_account=bank_account)
+    cards = Card.objects.filter(user=request.user)
     return render(
         request,
         'display_card.html',
@@ -39,4 +38,6 @@ def create_card(request):
     else:
         card_form = CardForm()
 
-    return render(request, "card/create.html", {"card_form": card_form, "cards": cards})
+    return render(
+        request, "card/create.html", {'section': 'cards', "card_form": card_form, "cards": cards}
+    )

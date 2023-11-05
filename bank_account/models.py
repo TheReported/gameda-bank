@@ -13,6 +13,9 @@ class BankAccount(models.Model):
     balance = models.DecimalField(decimal_places=2, default=0, max_digits=12)
     status = models.CharField(max_length=2, choices=CHOICES, default=ACTIVE)
 
+    class Meta:
+        ordering = ['-balance']
+
     @property
     def code(self):
         return f'A7-{self.id:04d}'
