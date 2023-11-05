@@ -1,0 +1,12 @@
+{% block content %}
+    {% for payment in payments %}
+        <div class="payment">
+            <p>
+                {{ payment.business }} - {{payment.ccc}} -{{ payment.amount }}€
+            </p>
+        </div>
+    {% empty %}
+        <p>There are no payments yet.</p>
+    {% endfor %}
+
+{% endblock %}

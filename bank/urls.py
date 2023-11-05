@@ -19,12 +19,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from account import views
+from account import views as acc_views
+from payment import views as payment_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('account.urls')),
-    path('', views.show_main, name='main'),
+    path('', acc_views.show_main, name='main'),
+    path('payment/', payment_views.process_payment, name='process_payment'),
 ]
 
 if settings.DEBUG:

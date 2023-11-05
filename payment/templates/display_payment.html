@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}{{ section.title }}{% endblock %}
+{% block content %}
+    <h1>My payments</h1>
+    {% include 'payment/list.html' %}
+{% endblock %}

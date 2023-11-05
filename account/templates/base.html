@@ -23,6 +23,9 @@
                 <li {% if section == "cards" %}class="selected"{% endif %}>
                     <a href="{% url "card:init" %}">Cards</a>
                 </li>
+                <li {% if section == "payments" %}class="selected"{% endif %}>
+                    <a href="{% url "payment:display" %}">Payments</a>
+                </li>
             </ul>
         {% endif %}
         <span class="user">
