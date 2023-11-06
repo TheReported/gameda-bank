@@ -3,4 +3,5 @@
 {% block content %}
     <h1>My payments</h1>
     {% include 'payment/list.html' %}
+    {% csrf_token %}
 {% endblock %}

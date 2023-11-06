@@ -20,14 +20,18 @@ class Card(models.Model):
     )
     alias = models.CharField(max_length=40, blank=False, null=False)
     status = models.CharField(max_length=2, choices=CHOICES, default=ACTIVE)
+    code = models.CharField(max_length=7, editable=False)
+    pin = models.CharField(max_length=3, editable=False)
+    get_pin = models.CharField(max_length=3, editable=False)
 
-    @property
-    def pin(self):
-        return make_password(''.join(random.choice(PIN_CHARS) for _ in range(3)))
+    def save(self, *args, **kwargs):
+        self.code = f'C7-{self.id:04d}'
+        self.get_pin = ''.join(random.choice(PIN_CHARS) for _ in range(3))
+        self.pin = make_password(self.get_pin)
+        super().save(*args, **kwargs)
 
-    @property
-    def code(self):
-        return f"C7-{self.id:04d}"
+    class Meta:
+        ordering = ['alias']
 
     def __str__(self):
         return self.alias

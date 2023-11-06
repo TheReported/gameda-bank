@@ -12,13 +12,14 @@ class BankAccount(models.Model):
     alias = models.CharField(max_length=40, blank=False, null=False)
     balance = models.DecimalField(decimal_places=2, default=0, max_digits=12)
     status = models.CharField(max_length=2, choices=CHOICES, default=ACTIVE)
+    code = models.CharField(max_length=7, editable=False)
+
+    def save(self, *args, **kwargs):
+        self.code = f'A7-{self.id:04d}'
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-balance']
-
-    @property
-    def code(self):
-        return f'A7-{self.id:04d}'
 
     def __str__(self):
         return self.code
