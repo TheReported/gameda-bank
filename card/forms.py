@@ -6,4 +6,10 @@ from .models import Card
 class CardForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ['alias', 'bank_account', 'status']
+        fields = ['alias', 'bank_account']
+
+
+class CardEditForm(forms.ModelForm):
+    class Meta:
+        model = Card
+        fields = ['alias', 'bank_account']

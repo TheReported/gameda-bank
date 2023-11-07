@@ -5,7 +5,6 @@ from account.status import ACTIVE, CHOICES
 
 
 class BankAccount(models.Model):
-    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='accounts', on_delete=models.CASCADE
     )

@@ -2,6 +2,6 @@
 {% block title %}{{ section.title }}{% endblock %}
 {% block content %}
     <h1>My payments</h1>
+    <p>You can make a <a href="{% url "process_payment" %}">payment</a></p>
     {% include 'payment/list.html' %}
-    {% csrf_token %}
 {% endblock %}

@@ -20,9 +20,9 @@ class Card(models.Model):
     )
     alias = models.CharField(max_length=40, blank=False, null=False)
     status = models.CharField(max_length=2, choices=CHOICES, default=ACTIVE)
-    code = models.CharField(max_length=7, editable=False)
     pin = models.CharField(max_length=3, editable=False)
     get_pin = models.CharField(max_length=3, editable=False)
+    code = models.CharField(max_length=7, editable=False)
 
     def save(self, *args, **kwargs):
         self.code = f'C7-{self.id:04d}'
@@ -34,4 +34,4 @@ class Card(models.Model):
         ordering = ['alias']
 
     def __str__(self):
-        return self.alias
+        return self.code

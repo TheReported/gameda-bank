@@ -21,7 +21,7 @@
                     <a href="#">Transferences</a>
                 </li>
                 <li {% if section == "cards" %}class="selected"{% endif %}>
-                    <a href="{% url "card:init" %}">Cards</a>
+                    <a href="{% url "card:display" %}">Cards</a>
                 </li>
                 <li {% if section == "payments" %}class="selected"{% endif %}>
                     <a href="{% url "payment:display" %}">Payments</a>
