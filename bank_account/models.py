@@ -14,6 +14,8 @@ class BankAccount(models.Model):
     code = models.CharField(max_length=7, editable=False)
 
     def save(self, *args, **kwargs):
+        if not self.id:
+            super().save(*args, **kwargs)
         self.code = f'A7-{self.id:04d}'
         super().save(*args, **kwargs)
 

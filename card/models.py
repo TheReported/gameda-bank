@@ -11,7 +11,6 @@ PIN_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 class Card(models.Model):
-    id = models.AutoField(primary_key=True)
     bank_account = models.ForeignKey(
         BankAccount, related_name='cards_in_bank_account', on_delete=models.CASCADE
     )
@@ -25,9 +24,12 @@ class Card(models.Model):
     code = models.CharField(max_length=7, editable=False)
 
     def save(self, *args, **kwargs):
+        if not self.id:
+            super().save(*args, **kwargs)
+        if not self.pin:
+            self.get_pin = ''.join(random.choice(PIN_CHARS) for _ in range(3))
+            self.pin = make_password(self.get_pin)
         self.code = f'C7-{self.id:04d}'
-        self.get_pin = ''.join(random.choice(PIN_CHARS) for _ in range(3))
-        self.pin = make_password(self.get_pin)
         super().save(*args, **kwargs)
 
     class Meta:
