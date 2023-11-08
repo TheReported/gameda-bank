@@ -220,6 +220,6 @@ img.user-detail {
 }
 
 .profile-photo-edit {
-    border-radius: 20px;
-    width: 200px;
+    border-radius: 50%;
+    width: 220px;
 }
