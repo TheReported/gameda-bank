@@ -2,7 +2,7 @@
 {% block title %}{{ section.title }}{% endblock %}
 {% block content %}
     <h2>Create a new payment</h2>
-    <form action="{% url "process_payment" %}" method="post">
+    <form action="{% url "payment_proccess" %}" method="post">
         {{ payment_form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="Create"></p>

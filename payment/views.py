@@ -12,7 +12,7 @@ from .models import Payment
 
 
 @login_required
-def process_payment(request):
+def payment_proccess(request):
     if request.method == 'POST':
         payment_form = PaymentForm(request.POST)
         if payment_form.is_valid():

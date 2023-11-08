@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'card.apps.CardConfig',
     'bank_account.apps.BankAccountConfig',
     'payment.apps.PaymentConfig',
+    'transaction.apps.TransactionConfig',
 ]
 
 MIDDLEWARE = [
