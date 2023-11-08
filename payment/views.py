@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import get_object_or_404, redirect, render
 
+from bank_account.comissions import apply_comissions
 from bank_account.models import BankAccount
 from card.models import Card
 
@@ -22,6 +23,7 @@ def process_payment(request):
                 bank_account = get_object_or_404(BankAccount, code=card.bank_account)
                 if amount <= bank_account.balance:
                     bank_account.balance = max(float(bank_account.balance) - amount, 0)
+                    bank_account.balance = apply_comissions(bank_account.balance, amount, "PA")
                     bank_account.save()
                     payment_form.save()
                     messages.success(request, "Your payment has been done successfully")
