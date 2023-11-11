@@ -50,12 +50,19 @@ ol {
     color:#f3f7cc;
     font-size:20px;
     margin-right:7%;
+    margin-top: 15px;
+}
+
+#header .logo-main {
+    width: 60px;
+    margin-right: 7%;
+    float:left;
 }
 
 #header ul.menu {
     list-style:none;
     float:left;
-    margin:0;
+    margin:2;
     padding:0;
     margin-left: 10px;
 }
@@ -174,45 +181,17 @@ ul.messages li a.close {
     float:left;
 }
 
-
-/* users */
-#people-list img {
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    margin-bottom:20px;
-}
-#people-list .user {
-    width:180px;
-    float:left;
-    overflow:auto;
-    padding:10px;
-}
-#people-list .info { text-align:center; }
 img.user-detail {
     border-radius:50%;
     float:left;
 }
+
 .profile-info {
     float:left;
     overflow:auto;
     margin-right:20px;
 }
 .image-container { margin-top:40px; }
-
-/* actions */
-.action {
-    clear:both;
-    overflow:auto;
-}
-.action .images {
-    float:left;
-    margin:0 10px 10px 0;
-}
-.action .date {
-    font-style:italic;
-    color:#ccc;
-}
 
 .profile-photo {
     border-radius: 20px;

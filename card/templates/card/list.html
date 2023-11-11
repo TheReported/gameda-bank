@@ -2,7 +2,7 @@
     {% for card in cards %}
         <div class="card">
             <p>
-                <a href="{% url "card:detail" card.id %}">{{ card.alias }}</a> - {{ card.code }} - {{ card.get_pin }}
+                <a href="{{ card.get_absolute_url }}">{{ card.alias }}</a> - {{ card.code }} - {{ card.get_pin }}
             </p>
         </div>
     {% empty %}

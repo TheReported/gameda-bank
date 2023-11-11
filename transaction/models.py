@@ -8,8 +8,10 @@ class Transaction(models.Model):
         OUTGOING = 'OUT', 'Outgoing'
         INCOMING = 'INC', 'Incoming'
 
-    sender = models.ForeignKey(BankAccount, related_name='transactions', on_delete=models.CASCADE)
-    cac = models.CharField(max_length=7)
+    sender = models.ForeignKey(
+        BankAccount, related_name='sender_transactions', on_delete=models.CASCADE
+    )
+    cac = models.ForeignKey(BankAccount, related_name='cac', on_delete=models.CASCADE)
     concept = models.TextField(max_length=200, blank=True, null=False)
     timeStamp = models.DateTimeField(auto_now_add=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -19,4 +21,4 @@ class Transaction(models.Model):
         ordering = ['-timeStamp']
 
     def __str__(self):
-        return self.agent
+        return self.sender

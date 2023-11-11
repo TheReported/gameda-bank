@@ -11,8 +11,8 @@ from .models import Profile
 
 @login_required
 def activity(request):
-    accounts = BankAccount.objects.filter(user=request.user)
-    cards = Card.objects.filter(bank_account=accounts.first())
+    accounts = BankAccount.active.filter(user=request.user)
+    cards = Card.active.filter(user=request.user)
     return render(
         request,
         'account/dashboard.html',

@@ -1,0 +1,11 @@
+{% block content %}
+    {% for transaction in transactions %}
+        <div class="transaction">
+            <p>
+                {{ transaction.sender }} - {{ transaction.cac }} -{{ transaction.amount }}€  {{ transaction.timeStamp }} {{ transaction.kind }}
+            </p>
+        </div>
+    {% empty %}
+        <p>There are no transaction yet.</p>
+    {% endfor %}
+{% endblock %}

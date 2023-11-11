@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
-from account.status import ACTIVE
+from account.utils import Status
 from payment.models import Payment
 
 from .forms import CardEditForm, CardForm
@@ -10,8 +10,8 @@ from .models import Card
 
 
 @login_required
-def detail(request, id):
-    card = get_object_or_404(Card, id=id)
+def detail(request, code):
+    card = get_object_or_404(Card, code=code, status=Status.ACTIVE)
     payments = Payment.objects.filter(ccc=card.id)
     return render(
         request,
@@ -22,7 +22,7 @@ def detail(request, id):
 
 @login_required
 def display_card(request):
-    cards = Card.objects.filter(user=request.user)
+    cards = Card.active.filter(user=request.user)
     return render(
         request,
         'display_card.html',
@@ -58,8 +58,8 @@ def create_done(request):
 
 
 @login_required
-def edit(request, id):
-    card = get_object_or_404(Card, id=id, status=ACTIVE)
+def edit(request, code):
+    card = get_object_or_404(Card, code=code, status=Status.ACTIVE)
     if request.method == 'POST':
         card_edit_form = CardEditForm(instance=card, data=request.POST)
         if card_edit_form.is_valid():

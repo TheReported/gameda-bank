@@ -2,7 +2,7 @@
 {% block title %}Edit your card{% endblock %}
 {% block content %}
     <h1>Edit your card</h1>
-    <form action="{% url "card:edit" card.id%}" method="post">
+    <form action="{% url "card:edit" card.code %}" method="post">
         {{ card_edit_form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="Save changes"></p>

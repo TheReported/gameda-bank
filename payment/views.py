@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
 from bank_account.comissions import apply_comissions
@@ -13,6 +13,8 @@ from card.models import Card
 
 from .forms import PaymentForm
 from .models import Payment
+
+PAYMENT_KIND = 'PAY'
 
 
 @csrf_exempt
@@ -23,12 +25,16 @@ def payment_curl_proccess(request):
     pin = data.get('pin')
     amount = float(data.get('amount'))
     try:
-        card = Card.objects.get(code=ccc)
+        card = Card.active.get(code=ccc)
         if card and check_password(pin, card.pin):
-            bank_account = BankAccount.objects.get(code=card.bank_account)
+            bank_account = BankAccount.active.get(code=card.bank_account)
             if bank_account and amount <= bank_account.balance:
                 bank_account.balance = max(float(bank_account.balance) - amount, 0)
-                bank_account.balance = apply_comissions(bank_account.balance, amount, "PA")
+                bank_account.balance = apply_comissions(
+                    bank_account.balance,
+                    amount,
+                    PAYMENT_KIND,
+                )
                 bank_account.save()
                 payment = Payment(
                     business=business,
@@ -39,7 +45,7 @@ def payment_curl_proccess(request):
                 payment.save()
                 return HttpResponse('200 OK\n')
     except BankAccount.DoesNotExist:
-        return HttpResponseForbidden('403 Forbidden\n')
+        return HttpResponseForbidden('403 Forbidden Bank Account \n')
     except Card.DoesNotExist:
         return HttpResponseForbidden('403 Forbidden Card\n')
     return HttpResponseBadRequest('400 Bad Request\n')
@@ -51,12 +57,15 @@ def payment_proccess(request):
         payment_form = PaymentForm(request.POST)
         if payment_form.is_valid():
             cd = payment_form.cleaned_data
-            amount = float(cd['amount'])
-            card = Card.objects.get(code=cd['ccc'])
-            bank_account = get_object_or_404(BankAccount, code=card.bank_account)
-            if amount <= bank_account.balance:
-                bank_account.balance = max(float(bank_account.balance) - amount, 0)
-                bank_account.balance = apply_comissions(bank_account.balance, amount, "PA")
+            card = Card.active.get(code=cd['ccc'])
+            bank_account = BankAccount.active.get(code=card.bank_account)
+            if cd['amount'] <= bank_account.balance:
+                bank_account.balance = max(bank_account.balance - cd['amount'], 0)
+                bank_account.balance = apply_comissions(
+                    bank_account.balance,
+                    cd['amount'],
+                    PAYMENT_KIND,
+                )
                 bank_account.save()
                 payment_form.save()
                 messages.success(request, "Your payment has been done successfully")

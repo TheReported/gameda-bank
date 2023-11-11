@@ -40,11 +40,3 @@ class UserRegistrationForm(forms.ModelForm):
         if User.objects.filter(email=data).exists():
             raise forms.ValidationError('Email already in use.')
         return data
-
-    # def check_dni(self):
-    #     dni_regex = "[0-9]{8}[A-Z]"
-    #     cd = self.cleaned_data
-
-    #     if re.match(dni_regex, cd['dni']) is None:
-    #         raise forms.ValidationError('Please insert a valid DNI')
-    #     return cd['dni']

@@ -11,4 +11,5 @@ urlpatterns = [
     path('bank_account/', include('bank_account.urls'), name='bank_account'),
     path('payment/', include('payment.urls'), name='payment'),
     path("card/", include("card.urls"), name="card"),
+    path('transaction/', include("transaction.urls"), name="transaction"),
 ]

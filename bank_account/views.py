@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 
-from account.status import ACTIVE
+from account.utils import Status
 from card.models import Card
 
 from .forms import BankAccountEditForm, BankAccountForm
@@ -11,7 +12,7 @@ from .models import BankAccount
 
 @login_required
 def display(request):
-    accounts = BankAccount.objects.filter(user=request.user)
+    accounts = BankAccount.active.filter(user=request.user)
     return render(
         request,
         'display_bank_account.html',
@@ -52,26 +53,31 @@ def create_done(request):
 
 
 @login_required
-def detail(request, id):
-    bank_account = get_object_or_404(BankAccount, id=id, status=ACTIVE)
+def detail(request, code):
+    bank_account = get_object_or_404(BankAccount, code=code, status=Status.ACTIVE)
     if bank_account:
-        cards = Card.objects.filter(bank_account=bank_account)
+        cards = Card.active.filter(bank_account=bank_account)
         return render(
             request,
             'bank_account/detail.html',
-            {'section': 'accounts', 'bank_account': bank_account, 'cards': cards},
+            {
+                'section': 'accounts',
+                'bank_account': bank_account,
+                'cards': cards,
+                'code': code,
+            },
         )
 
 
 @login_required
-def edit(request, id):
-    bank_account = get_object_or_404(BankAccount, id=id, status=ACTIVE)
+def edit(request, code):
+    bank_account = get_object_or_404(BankAccount, code=code, status=Status.ACTIVE)
     if request.method == 'POST':
         bank_account_form = BankAccountEditForm(instance=bank_account, data=request.POST)
         if bank_account_form.is_valid():
             bank_account_form.save()
             messages.success(request, 'Edit a bank account successfully')
-            return redirect('bank_account:display')
+            return redirect(reverse('bank_account:detail', code=code))
         else:
             messages.error(request, 'Error editing a bank account')
     else:

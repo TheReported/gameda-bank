@@ -2,7 +2,7 @@
 {% block title %}Edit your bank account{% endblock %}
 {% block content %}
     <h1>Edit your bank account</h1>
-    <form action="{% url "bank_account:edit" bank_account.id%}" method="post">
+    <form action="{% url "bank_account:bank_account_edit" bank_account.code %}" method="post">
         {{ bank_account_edit_form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="Save changes"></p>

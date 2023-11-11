@@ -2,7 +2,7 @@
 {% block title %} {{ card.alias }} {% endblock %}
 {% block content%}
     <h1>{{ card.alias }} - {{ card.code }}</h1>
-    <p>You can edit your <a href="{% url "card:edit" card.id %}"> card {{ card.alias }}</a></p>
+    <p>You can edit your <a href="{% url "card:edit" card.code %}"> card {{ card.alias }}</a></p>
     {% include "payment/list.html" %}
     {% csrf_token %}
 {% endblock %}
