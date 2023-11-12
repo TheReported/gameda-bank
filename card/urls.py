@@ -10,4 +10,5 @@ urlpatterns = [
     path('create/done', views.create_done, name='create_done'),
     path('<code>/', views.detail, name='detail'),
     path('<code>/edit/', views.edit, name='edit'),
+    path('<code>/discharge/', views.discharge, name="discharge"),
 ]

@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from account.utils import Status
+from bank_account.models import BankAccount
 from payment.models import Payment
 
 from .forms import CardEditForm, CardForm
@@ -36,8 +37,13 @@ def create(request):
     if request.method == 'POST':
         card_form = CardForm(request.POST)
         if card_form.is_valid():
+            cd = card_form.cleaned_data
+            bank_account = get_object_or_404(
+                BankAccount, code=cd['bank_account'], user=request.user, status=Status.ACTIVE
+            )
             card = card_form.save(commit=False)
             card.user = request.user
+            card.bank_account = bank_account
             card.save()
             messages.success(request, "You have created a Card successfully")
             return redirect('card:display')
@@ -64,9 +70,16 @@ def edit(request, code):
     if request.method == 'POST':
         card_edit_form = CardEditForm(instance=card, data=request.POST)
         if card_edit_form.is_valid():
-            card_edit_form.save()
+            cd = card_edit_form.cleaned_data
+            bank_account = get_object_or_404(
+                BankAccount, code=cd['bank_account'], user=request.user, status=Status.ACTIVE
+            )
+            card = card_edit_form.save(commit=False)
+            card.user = request.user
+            card.bank_account = bank_account
+            card.save()
             messages.success(request, 'You have edited your card successfully.')
-            return redirect('card:detail')
+            return redirect(card.get_absolute_url())
         messages.error(request, 'There has been an error editing your card.')
     else:
         card_edit_form = CardEditForm(instance=card)

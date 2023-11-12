@@ -81,7 +81,7 @@ def edit(request, code):
         if bank_account_form.is_valid():
             bank_account_form.save()
             messages.success(request, 'Edit a bank account successfully')
-            return redirect(reverse('bank_account:detail'))
+            return redirect(bank_account.get_absolute_url())
         else:
             messages.error(request, 'Error editing a bank account')
     else:

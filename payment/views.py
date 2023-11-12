@@ -4,9 +4,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
+from account.utils import Status
 from bank_account.comissions import apply_comissions
 from bank_account.models import BankAccount
 from card.models import Card
@@ -57,19 +58,25 @@ def payment_proccess(request):
         payment_form = PaymentForm(request.POST)
         if payment_form.is_valid():
             cd = payment_form.cleaned_data
-            card = Card.active.get(code=cd['ccc'])
-            bank_account = BankAccount.active.get(code=card.bank_account)
-            if cd['amount'] <= bank_account.balance:
-                bank_account.balance = max(bank_account.balance - cd['amount'], 0)
-                bank_account.balance = apply_comissions(
-                    bank_account.balance,
-                    cd['amount'],
-                    PAYMENT_KIND,
-                )
-                bank_account.save()
-                payment_form.save()
-                messages.success(request, "Your payment has been done successfully")
-                return redirect('payment:done')
+            card = get_object_or_404(Card, code=cd['ccc'], status=Status.ACTIVE)
+            if check_password(cd['pin'], card.pin):
+                bank_account = BankAccount.active.get(code=card.bank_account)
+                if cd['amount'] <= bank_account.balance:
+                    bank_account.balance = max(bank_account.balance - cd['amount'], 0)
+                    bank_account.balance = apply_comissions(
+                        bank_account.balance,
+                        cd['amount'],
+                        PAYMENT_KIND,
+                    )
+                    bank_account.save()
+                    payment = payment_form.save(commit=False)
+                    payment.ccc = card
+                    payment.user = request.user
+                    payment.save()
+                    messages.success(request, "Your payment has been done successfully")
+                    return redirect('payment:done')
+                messages.error(request, f"{bank_account.code} does not have enough money.")
+            messages.error(request, "The pin introduced is not correct")
         messages.error(request, "There was an error on your payment")
     else:
         payment_form = PaymentForm()
