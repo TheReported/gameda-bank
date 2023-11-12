@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
 from account.utils import Status
 from payment.models import Payment
@@ -65,7 +66,7 @@ def edit(request, code):
         if card_edit_form.is_valid():
             card_edit_form.save()
             messages.success(request, 'You have edited your card successfully.')
-            return redirect('card:display')
+            return redirect('card:detail')
         messages.error(request, 'There has been an error editing your card.')
     else:
         card_edit_form = CardEditForm(instance=card)
@@ -74,3 +75,13 @@ def edit(request, code):
         'card/edit.html',
         {'section': 'cards', 'card_edit_form': card_edit_form, 'card': card},
     )
+
+
+@login_required
+@require_POST
+def discharge(request, code):
+    card = get_object_or_404(Card, code=code, status=Status.ACTIVE)
+    card.status = Status.DISCHARGE
+    card.save()
+    messages.success(request, 'You have discharge your bank account successfully')
+    return redirect('card:display')

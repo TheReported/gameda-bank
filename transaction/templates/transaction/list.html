@@ -1,11 +1,26 @@
 {% block content %}
-    {% for transaction in transactions %}
-        <div class="transaction">
-            <p>
-                {{ transaction.sender }} - {{ transaction.cac }} -{{ transaction.amount }}€  {{ transaction.timeStamp }} {{ transaction.kind }}
-            </p>
-        </div>
-    {% empty %}
-        <p>There are no transaction yet.</p>
-    {% endfor %}
+    <div class="transaction">
+        <table>
+            <caption>Transactions Summary</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Sender</th>
+                    <th scope="col">CAC</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td data-label="Sender">{{ transaction.sender }}</td>
+                        <td data-label="CAC">{{ transaction.cac }}</td>
+                        <td data-label="Amount">€{{ transaction.amount }}</td>
+                        <td data-label="Created">{{ transaction.timeStamp }}</td>
+                    </tr>
+                {% empty %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

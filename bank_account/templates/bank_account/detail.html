@@ -5,5 +5,5 @@
     <p>You can edit the <a href="{% url "bank_account:bank_account_edit" bank_account.code %}"> bank account {{ bank_account.alias }} </a></p>
     <h3>My cards</h3>
     {% include "card/list.html" %}
-    {% csrf_token %}
+    {% include 'transaction/list.html' %}
 {% endblock %}

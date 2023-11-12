@@ -1,12 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
 from bank_account.models import BankAccount
 from card.models import Card
 
 from .forms import ProfileEditForm, UserEditForm, UserRegistrationForm
 from .models import Profile
+from .utils import Status
 
 
 @login_required
@@ -57,3 +60,13 @@ def edit(request):
     return render(
         request, 'account/edit.html', {'user_form': user_form, 'profile_form': profile_form}
     )
+
+
+@login_required
+@require_POST
+def discharge(request, code):
+    user = get_object_or_404(User, code=code, status=Status.ACTIVE)
+    user.status = Status.DISCHARGE
+    user.save()
+    messages.success(request, 'You have discharge your bank account successfully')
+    return redirect('bank_account:display')

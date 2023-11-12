@@ -2,9 +2,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.views.decorators.http import require_POST
 
 from account.utils import Status
 from card.models import Card
+from transaction.models import Transaction
 
 from .forms import BankAccountEditForm, BankAccountForm
 from .models import BankAccount
@@ -55,6 +57,8 @@ def create_done(request):
 @login_required
 def detail(request, code):
     bank_account = get_object_or_404(BankAccount, code=code, status=Status.ACTIVE)
+    transactions = Transaction.objects.filter(sender=code) or Transaction.objects.filter(cac=code)
+
     if bank_account:
         cards = Card.active.filter(bank_account=bank_account)
         return render(
@@ -64,7 +68,7 @@ def detail(request, code):
                 'section': 'accounts',
                 'bank_account': bank_account,
                 'cards': cards,
-                'code': code,
+                'transactions': transactions,
             },
         )
 
@@ -77,7 +81,7 @@ def edit(request, code):
         if bank_account_form.is_valid():
             bank_account_form.save()
             messages.success(request, 'Edit a bank account successfully')
-            return redirect(reverse('bank_account:detail', code=code))
+            return redirect(reverse('bank_account:detail'))
         else:
             messages.error(request, 'Error editing a bank account')
     else:
@@ -91,3 +95,13 @@ def edit(request, code):
             'bank_account': bank_account,
         },
     )
+
+
+@login_required
+@require_POST
+def discharge(request, code):
+    bank_account = get_object_or_404(BankAccount, code=code, status=Status.ACTIVE)
+    bank_account.status = Status.DISCHARGE
+    bank_account.save()
+    messages.success(request, 'You have discharge your bank account successfully')
+    return redirect('bank_account:display')

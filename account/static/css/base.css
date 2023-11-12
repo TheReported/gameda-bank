@@ -4,6 +4,10 @@ body {
     margin:0;
     padding:0;
     font-family:helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
 }
 
 p {
@@ -118,6 +122,18 @@ input, textarea {
     padding:6px 10px;
     font-size:14px;
 }
+
+button[type=submit] {
+    font-weight:bold;
+    background:rgb(187, 21, 21);
+    color:#fff;
+    padding:10px 20px;
+    font-size:14px;
+    border:0;
+    text-transform:uppercase;
+    
+}
+
 input[type=submit], a.button {
     font-weight:bold;
     background:#1297c0;
@@ -201,4 +217,182 @@ img.user-detail {
 .profile-photo-edit {
     border-radius: 50%;
     width: 220px;
+}
+
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+    color: black;
+    padding:10px;
+    background: #1297c0;
+    color: white;
+  }
+  
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+table th,
+table td {
+    padding: .625em;
+    text-align: center;
+  }
+  
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #1297c0;
+  }
+  
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+    
+    table caption {
+        font-size: 1.3em;
+    }
+        
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+        
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+        
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+        
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+        
+    table td:last-child {
+        border-bottom: 0;
+    }
+}
+.card {
+    position: relative;
+    background: radial-gradient(circle at 12.3% 19.3%, rgb(18, 151, 192) 0%, rgb(95, 209, 249) 100.2%);
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1), 1px 1px 6px 0px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    display: inline-block;
+    font-family: "Courier New", Monospace;
+    font-weight: bold;
+    height: 200px;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+    width: 325px;
+    box-sizing: border-box;
+
+    
+}
+  
+.card__number {
+    margin-top: 80px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-shadow: 1px 1px 1px rgba(81, 81, 81, 0.4);
+}
+  
+.card__info {
+    display: flex;
+    margin-top: 30px;
+    span {
+      display: block;
+      font-size: 11px;
+      font-weight: normal;
+      margin-bottom: 5px;
+      text-shadow: none;
+    }
+}
+  
+.card__info__name,
+.card__info__expire {
+    font-size: 15px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgba(81, 81, 81, 0.4);
+}
+  
+.card__info__name {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+  
+.card--empty,
+.card__add {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.card--empty {
+    background: none;
+    box-shadow: none;
+    border: 2px dashed #00AEEF;
+}
+.card__add {
+    background: #00AEEF;
+    border: 1px solid #04ADE4;
+    border-radius: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    height: 50px;
+    width: 50px;
+}
+.card__text {
+    color: #939393;
+    display: block;
+}
+
+.logocard {
+    width: 40px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+footer {
+    background-color: #efefef; 
+    padding: 10px; 
+    margin-top: auto;
+    text-align: center; 
+}
+
+.foot-copy {
+    padding-top: 11px;
+    color: #333; 
 }

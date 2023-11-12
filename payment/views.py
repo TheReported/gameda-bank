@@ -85,8 +85,12 @@ def payment_proccess(request):
 
 @login_required
 def display_payment(request):
-    payments = Payment.objects.all()
-    return render(request, 'display_payment.html', {'section': 'payments', 'payments': payments})
+    payments = Payment.objects.filter(user=request.user)
+    return render(
+        request,
+        'display_payment.html',
+        {'section': 'payments', 'payments': payments},
+    )
 
 
 @login_required

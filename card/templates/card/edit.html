@@ -7,4 +7,9 @@
         {% csrf_token %}
         <p><input type="submit" value="Save changes"></p>
     </form>
+    <form action="{% url "card:discharge" card.code %}" method="post">
+        {% csrf_token %}
+        <p><button type="submit">Discharge account</button></p>
+    </form>
+
 {% endblock %}

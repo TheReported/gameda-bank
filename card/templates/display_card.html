@@ -2,6 +2,9 @@
 {%block title%}My Cards{%endblock%}
 {%block content%}
     <h1>My Cards</h1>
-    <p>You can create a new <a href="{% url "card:create" %}">card</a></p>
     {%include "card/list.html"%}
+    <div class="card card--empty">
+        <div class="card__add"><a href="{% url "card:create" %}">+</a></div>
+        <p class="card__text">Add Card</p>
+      </div>
 {% endblock %}
