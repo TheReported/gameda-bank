@@ -1,12 +1,19 @@
+{% load static %}
 {% block content %}
     {% for account in accounts %}
-        <div class="account">
-            <p>
-                <a href="{{ account.get_absolute_url }}">{{ account.alias }}</a> - {{ account.balance }}€
-            </p>
+    <div class="box-container">
+        <div class="box">
+          <h1> {{ account.alias }} <img src="{% static 'img/logo.png' %}" class="logobox"> </h1> 
+          <p>Code: {{ account.code }} </p>
+          <br>
+          <p>Current Balance: {{ account.balance }} </p>
+      
+          <div class="box-footer">
+            <h4><a href="{{ account.get_absolute_url }}">See Details</a></h4>
+          </div>
         </div>
+    </div>
     {% empty %}
         <p>There are no accounts yet.</p>
     {% endfor %}
-
 {% endblock %}

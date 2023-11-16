@@ -1,25 +1,27 @@
 {% load static %}
 {% block content %}
     {% for card in cards %}
-        <a href="{{ card.get_absolute_url }}"><div class="card">
-            <div class="card__number">{{ card.code }}</div>
-            <div class="card__info">
-                <div class="card__info__name">
-                    <span>Alias</span>
-                    <br>
-                    {{ card.alias }}
+        <div class="card-container">
+            <a href="{{ card.get_absolute_url }}"><div class="card">
+                <div class="card__number">{{ card.code }}</div>
+                <div class="card__info">
+                    <div class="card__info__name">
+                        <span>Alias</span>
+                        <br>
+                        {{ card.alias }}
+                    </div>
+                    <div class="card__info__name">
+                        <span>PIN</span>
+                        <br>
+                        {{ card.get_pin }}
+                    </div>
                 </div>
-                <div class="card__info__name">
-                    <span>PIN</span>
-                    <br>
-                        ***
+                <div class="logo">
+                    <img src="{% static 'img/logo.png' %}" class="logocard">
                 </div>
             </div>
-            <div class="logo">
-                <img src="{% static 'img/logo.png' %}" class="logocard">
-            </div>
+            </a>
         </div>
-        </a>
     {% empty %}
         <p>There are no cards created yet.</p>
     {% endfor %}

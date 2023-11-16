@@ -90,7 +90,7 @@ def transaction_inconming_proccess(request):
     transaction = Transaction(
         sender=data['sender'],
         cac=bank_account,
-        concept=data['sender'],
+        concept=data['concept'],
         amount=amount,
         kind=Transaction.Kind.INCOMING,
     )

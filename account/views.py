@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
 from bank_account.models import BankAccount
+from transaction.models import Transaction
 
 from .forms import ProfileEditForm, UserEditForm, UserRegistrationForm
 from .models import Profile
@@ -13,20 +15,28 @@ def show_main(request):
     if request.user.is_authenticated:
         return redirect('activity')
 
-    return render(request, 'base.html', {'section': 'base'})
+    return render(request, 'additional_content.html', {'section': 'base'})
 
 
 @login_required
 def activity(request):
+    try:
+        rich_bank_account = BankAccount.active.filter(user=request.user).first()
+    except BankAccount.DoesNotExist:
+        return redirect("bank_account:display")
     bank_accounts = BankAccount.active.filter(user=request.user)
     cards = [card for bank_account in bank_accounts for card in bank_account.cards.all()]
+    transactions = []
 
+    for bank_account in bank_accounts:
+        transaction = Transaction.objects.filter(Q(sender=bank_account.code) | Q(cac=bank_account))
+        transactions.extend(transaction)
     return render(
         request,
         'account/dashboard.html',
         {
             'section': 'dashboard',
-            'accounts': bank_accounts,
+            'bank_account': rich_bank_account,
             'cards': cards,
         },
     )
