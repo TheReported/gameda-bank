@@ -1,30 +1,35 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
 from bank_account.models import BankAccount
-from card.models import Card
 
 from .forms import ProfileEditForm, UserEditForm, UserRegistrationForm
 from .models import Profile
-from .utils import Status
+
+
+def show_main(request):
+    if request.user.is_authenticated:
+        return redirect('activity')
+
+    return render(request, 'base.html', {'section': 'base'})
 
 
 @login_required
 def activity(request):
-    accounts = BankAccount.active.filter(user=request.user)
-    cards = Card.active.filter(user=request.user)
+    bank_accounts = BankAccount.active.filter(user=request.user)
+    cards = [card for bank_account in bank_accounts for card in bank_account.cards.all()]
+
     return render(
         request,
         'account/dashboard.html',
-        {'section': 'dashboard', 'accounts': accounts, 'cards': cards},
+        {
+            'section': 'dashboard',
+            'accounts': bank_accounts,
+            'cards': cards,
+        },
     )
-
-
-def show_main(request):
-    return render(request, 'base.html', {'section': 'base'})
 
 
 def register(request):
@@ -64,9 +69,8 @@ def edit(request):
 
 @login_required
 @require_POST
-def discharge(request, code):
-    user = get_object_or_404(User, code=code, status=Status.ACTIVE)
-    user.status = Status.DISCHARGE
-    user.save()
-    messages.success(request, 'You have discharge your bank account successfully')
-    return redirect('bank_account:display')
+def discharge(request):
+    request.user.is_active = False
+    request.user.save()
+    messages.success(request, 'You have discharge your account successfully')
+    return redirect('main')

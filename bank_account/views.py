@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
 from django.views.decorators.http import require_POST
 
 from account.utils import Status
@@ -14,11 +13,11 @@ from .models import BankAccount
 
 @login_required
 def display(request):
-    accounts = BankAccount.active.filter(user=request.user)
+    bank_accounts = BankAccount.active.filter(user=request.user)
     return render(
         request,
         'display_bank_account.html',
-        {'section': 'accounts', 'accounts': accounts},
+        {'section': 'accounts', 'accounts': bank_accounts},
     )
 
 
@@ -57,10 +56,12 @@ def create_done(request):
 @login_required
 def detail(request, code):
     bank_account = get_object_or_404(BankAccount, code=code, status=Status.ACTIVE)
-    transactions = Transaction.objects.filter(sender=code) or Transaction.objects.filter(cac=code)
+    cards = Card.active.filter(bank_account=bank_account)
+    transactions = Transaction.objects.filter(sender=code) | Transaction.objects.filter(
+        cac__code=code
+    )
 
     if bank_account:
-        cards = Card.active.filter(bank_account=bank_account)
         return render(
             request,
             'bank_account/detail.html',

@@ -1,0 +1,7 @@
+a.pretty::after {
+  content: " ↗";
+}
+
+img.airline-logo {
+  padding: 1rem;
+}
