@@ -4,4 +4,5 @@
     <h1>My transactions</h1>
     <p>You can make a <a href="{% url "transaction:outgoing" %}">transaction</a></p>
     {% include 'transaction/list.html' %}
+    {% include "pagination_transaction.html" with page=transactions %}
 {% endblock %}

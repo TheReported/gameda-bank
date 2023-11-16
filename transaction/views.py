@@ -3,6 +3,7 @@ import json
 import requests
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
@@ -101,12 +102,21 @@ def transaction_inconming_proccess(request):
 @login_required
 def display_transaction(request):
     bank_accounts = BankAccount.active.filter(user=request.user)
-    transactions = []
+    all_transactions = []
 
     for bank_account in bank_accounts:
         transaction = Transaction.objects.filter(Q(sender=bank_account.code) | Q(cac=bank_account))
-        transactions.extend(transaction)
+        all_transactions.extend(transaction)
 
+    paginator = Paginator(all_transactions, 10)
+    page = request.GET.get("page")
+
+    try:
+        transactions = paginator.page(page)
+    except PageNotAnInteger:
+        transactions = paginator.page(1)
+    except EmptyPage:
+        transactions = paginator.page(paginator.num_pages)
     return render(
         request,
         'display_transaction.html',

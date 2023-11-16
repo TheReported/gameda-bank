@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: white;
 
 }
 
@@ -465,7 +466,7 @@ footer {
 
 .box-footer a {
     font-weight: bold;
-    color: orange; 
+    color: white; 
 }
 
 
@@ -494,14 +495,6 @@ footer {
     font-weight: bold;
     height: 50px;
     width: 50px;
-}
-
-
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f6f6f6;
 }
 
 .header {
@@ -626,7 +619,6 @@ body {
   
   #button:hover{
     margin-top: 30px;
-    background: #61DFD1;
     border: none;
     border-radius: 0%;
     padding: 15px 15px 15px 15px;
@@ -695,3 +687,40 @@ body {
       width: 100px;
       border-top: 3px solid #ffffff;
   }
+
+
+
+  
+.pagination ul {
+    margin: 2em auto;
+    padding-left: 0;
+    list-style-type: none;
+}
+  
+.page-number {
+    display: inline;
+}
+  
+.page-number a {
+    text-decoration: none;
+    color: black;
+}
+
+.pagination-3 .page-number {
+    margin: 0.25em;
+}
+  
+.pagination-3 .page-number a {
+    padding: 0.125em;
+}
+  
+.pagination-3 .active {
+    padding: 4px 8px;
+    border-radius: 50%;
+    background-color: #16425b;
+    color: white;
+}
+  
+.pagination-3 .active a {
+    color: white;
+}

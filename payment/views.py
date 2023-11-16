@@ -3,6 +3,7 @@ import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
@@ -85,7 +86,16 @@ def payment_proccess(request):
 
 @login_required
 def display_payment(request):
-    payments = Payment.objects.filter(ccc__bank_account__user=request.user)
+    all_payments = Payment.objects.filter(ccc__bank_account__user=request.user)
+    paginator = Paginator(all_payments, 10)
+    page = request.GET.get("page")
+
+    try:
+        payments = paginator.page(page)
+    except PageNotAnInteger:
+        payments = paginator.page(1)
+    except EmptyPage:
+        payments = paginator.page(paginator.num_pages)
     return render(
         request,
         'display_payment.html',

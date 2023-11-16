@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
 from bank_account.models import BankAccount
+from card.models import Card
 from transaction.models import Transaction
 
 from .forms import ProfileEditForm, UserEditForm, UserRegistrationForm
@@ -20,24 +21,30 @@ def show_main(request):
 
 @login_required
 def activity(request):
-    try:
-        rich_bank_account = BankAccount.active.filter(user=request.user).first()
-    except BankAccount.DoesNotExist:
-        return redirect("bank_account:display")
     bank_accounts = BankAccount.active.filter(user=request.user)
-    cards = [card for bank_account in bank_accounts for card in bank_account.cards.all()]
+    rich_bank_account = bank_accounts.first()
+    cards = []
     transactions = []
 
     for bank_account in bank_accounts:
         transaction = Transaction.objects.filter(Q(sender=bank_account.code) | Q(cac=bank_account))
         transactions.extend(transaction)
+        cards.extend(bank_account.cards.all())
+
+    most_payments_card = (
+        Card.objects.filter(payments_card__ccc__in=cards)
+        .annotate(num_payments=Count('payments_card'))
+        .order_by('-num_payments')
+        .first()
+    )
+
     return render(
         request,
         'account/dashboard.html',
         {
             'section': 'dashboard',
             'bank_account': rich_bank_account,
-            'cards': cards,
+            'card': most_payments_card,
         },
     )
 
