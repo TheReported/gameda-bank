@@ -69,9 +69,12 @@ def payment_proccess(request):
                     payment.save()
                     messages.success(request, "Your payment has been done successfully")
                     return redirect('payment:done')
-                messages.error(request, f"{bank_account.code} does not have enough money.")
-            messages.error(request, "The pin introduced is not correct")
-        messages.error(request, "There was an error on your payment")
+                else:
+                    messages.error(request, f"{bank_account.code} does not have enough money.")
+            else:
+                messages.error(request, "The pin introduced is not correct")
+        else:
+            messages.error(request, "There was an error on your payment")
     else:
         payment_form = PaymentForm()
     return render(

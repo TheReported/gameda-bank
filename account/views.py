@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 
 from bank_account.models import BankAccount
 from card.models import Card
+from payment.models import Payment
 from transaction.models import Transaction
 
 from .forms import ProfileEditForm, UserEditForm, UserRegistrationForm
@@ -45,6 +46,7 @@ def activity(request):
             'section': 'dashboard',
             'bank_account': rich_bank_account,
             'card': most_payments_card,
+            'transactions': transactions[:5],
         },
     )
 

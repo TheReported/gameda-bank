@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Activity{% endblock %}
 {% block content %}
+    {% load dashboard_tags %}
     {% load static %}
     <h1>Activity</h1>
     <p>Welcome to your activity.</p>
     <div>
         <img src="{% if user.profile.photo %} {{ user.profile.photo.url }}{% else %} {% static "img/avatar.png" %}{% endif %}" class="profile-photo-edit">       
     </div>
-    {% include 'bank_account/rich_bank_account.html' %}
+    {% include 'bank_account/rich_bank_account.html'%}
     <br>
     {% include 'card/most_used_card.html' %}
     <br>
-    {% include 'payment/list.html' %}
+    {% show_latest_payments user=user as payments %}
+    {% include 'payment/list.html'%}
     <br>
     {% include 'transaction/list.html' %}
 {% endblock %}
