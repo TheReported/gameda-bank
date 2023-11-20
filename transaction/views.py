@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 
 import requests
 from django.contrib import messages
@@ -11,8 +12,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 from account.utils import Status, get_info_bank
-from bank_account.comissions import apply_comissions
 from bank_account.models import BankAccount
+from bank_account.utils import apply_movement
 
 from .forms import TransactionForm
 from .models import Transaction
@@ -25,44 +26,53 @@ def transaction_outgoing_proccess(request):
         if transaction_form.is_valid():
             cd = transaction_form.cleaned_data
             cac = cd['cac']
-            amount = cd['amount']
+            amount = Decimal(cd['amount'])
             sender = get_object_or_404(
                 BankAccount, code=cd['sender'], user=request.user, status=Status.ACTIVE
             )
 
+            cac = (
+                get_object_or_404(BankAccount, code=cd['cac'], status=Status.ACTIVE)
+                if cac[:2] == 'A7'
+                else False
+            )
             if sender == cac:
                 return HttpResponseBadRequest('Sender and cac are equal')
 
             if sender and cac:
                 if amount <= sender.balance:
                     transaction = transaction_form.save(commit=False)
-                    sender.balance -= amount
-                    sender.balance = apply_comissions(
+                    sender.balance, status_movement = apply_movement(
+                        sender.balance, amount, transaction.kind
+                    )
+                    if status_movement:
+                        cac.balance += amount
+                        transaction.user = request.user
+                        sender.save()
+                        cac.save()
+                        transaction.save()
+                        messages.success(request, "Your payment has been done successfully")
+                        return redirect('transaction:done')
+                    else:
+                        messages.error(request, 'You dont have enough money')
+            else:
+                bank = get_info_bank(cd['cac'])
+                response = requests.post(
+                    f'{bank["url"]}:8000/transfer/incoming/', json=request.POST
+                )
+                if response.status_code == 200:
+                    transaction = transaction_form.save(commit=False)
+                    sender.balance, status_movement = apply_movement(
                         sender.balance, cd['amount'], transaction.kind
                     )
-                    cac.balance += amount
-                    transaction.user = request.user
-                    sender.save()
-                    cac.save()
-                    transaction.save()
-                    messages.success(request, "Your payment has been done successfully")
-                    return redirect('transaction:done')
-            else:
-                bank = get_info_bank(cac.code)
-                response = requests.post(f'{bank["url"]}/transaction/incoming', data=request.POST)
-                if response.status_code == 200:
-                    if amount <= sender.balance:
-                        transaction = transaction_form.save(commit=False)
-                        sender.balance -= amount
-                        sender.balance = apply_comissions(
-                            sender.balance, cd['amount'], transaction.kind
-                        )
+                    if status_movement:
                         sender.save()
                         transaction.save()
                         messages.success(request, "Your payment has been done successfully")
-                    return redirect('transaction:done')
-
-        messages.error(request, "There was an error on your transaction")
+                        return redirect('transaction:done')
+                return HttpResponseBadRequest()
+        else:
+            messages.error(request, "There was an error on your transaction")
     else:
         transaction_form = TransactionForm()
     return render(
@@ -79,14 +89,13 @@ def transaction_outgoing_proccess(request):
 @csrf_exempt
 def transaction_inconming_proccess(request):
     data = json.loads(request.body)
-    amount = float(data['amount'])
+    amount = Decimal(data['amount'])
     try:
         bank_account = BankAccount.active.get(code=data['cac'])
     except BankAccount.DoesNotExist:
         return HttpResponseForbidden('Bank account does not exists')
 
-    bank_account.balance = float(bank_account.balance) + amount
-    bank_account.balance = apply_comissions(bank_account.balance, amount, Transaction.Kind.INCOMING)
+    bank_account.balance += amount
     bank_account.save()
     transaction = Transaction(
         sender=data['sender'],
@@ -105,7 +114,9 @@ def display_transaction(request):
     all_transactions = []
 
     for bank_account in bank_accounts:
-        transaction = Transaction.objects.filter(Q(sender=bank_account.code) | Q(cac=bank_account))
+        transaction = Transaction.objects.filter(
+            Q(sender=bank_account.code) | Q(cac=bank_account.code)
+        )
         all_transactions.extend(transaction)
 
     paginator = Paginator(all_transactions, 10)

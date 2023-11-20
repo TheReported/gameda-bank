@@ -28,7 +28,7 @@ urlpatterns = [
     path('user/', include('account.urls')),
     path('', acc_views.show_main, name='main'),
     path('payment/', payment_views.payment_curl_proccess, name='payment_curl_proccess'),
-    path('transaction/incoming', transaction_views.transaction_inconming_proccess, name='incoming'),
+    path('transfer/incoming/', transaction_views.transaction_inconming_proccess, name='incoming'),
 ]
 
 if settings.DEBUG:

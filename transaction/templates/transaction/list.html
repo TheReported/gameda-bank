@@ -6,6 +6,7 @@
                 <tr>
                     <th scope="col">Sender</th>
                     <th scope="col">CAC</th>
+                    <th scope="col">Concept</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Created</th>
                 </tr>
@@ -15,6 +16,7 @@
                     <tr>
                         <td data-label="Sender">{{ transaction.sender }}</td>
                         <td data-label="CAC">{{ transaction.cac }}</td>
+                        <td data-label="CAC">{{ transaction.concept|truncatewords:30 }}</td>
                         <td data-label="Amount">€{{ transaction.amount }}</td>
                         <td data-label="Created">{{ transaction.timeStamp }}</td>
                     </tr>

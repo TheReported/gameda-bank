@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -9,8 +10,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
 from account.utils import Status
-from bank_account.comissions import apply_comissions
 from bank_account.models import BankAccount
+from bank_account.utils import apply_movement
 from card.models import Card
 
 from .forms import PaymentForm
@@ -22,17 +23,16 @@ PAYMENT_KIND = 'PAY'
 @csrf_exempt
 def payment_curl_proccess(request):
     data = json.loads(request.body)
-    amount = float(data.get('amount'))
+    amount = Decimal(data.get('amount'))
     try:
         card = Card.active.get(code=data['ccc'])
         if card and check_password(data['pin'], card.pin):
-            if amount <= card.bank_account.balance:
-                card.bank_account.balance = max(float(card.bank_account.balance) - amount, 0)
-                card.bank_account.balance = apply_comissions(
-                    card.bank_account.balance,
-                    amount,
-                    PAYMENT_KIND,
-                )
+            card.bank_account.balance, status = apply_movement(
+                card.bank_account.balance,
+                amount,
+                PAYMENT_KIND,
+            )
+            if status:
                 card.bank_account.save()
                 payment = Payment(
                     business=data['business'],
@@ -53,16 +53,17 @@ def payment_proccess(request):
         payment_form = PaymentForm(request.POST)
         if payment_form.is_valid():
             cd = payment_form.cleaned_data
+            amount = Decimal(cd['amount'])
             card = get_object_or_404(Card, code=cd['ccc'], status=Status.ACTIVE)
             if check_password(cd['pin'], card.pin):
                 bank_account = get_object_or_404(
                     BankAccount, code=card.bank_account, status=Status.ACTIVE
                 )
-                if cd['amount'] <= bank_account.balance:
-                    bank_account.balance = max(bank_account.balance - cd['amount'], 0)
-                    bank_account.balance = apply_comissions(
-                        bank_account.balance, cd['amount'], PAYMENT_KIND
-                    )
+
+                bank_account.balance, status_movement = apply_movement(
+                    bank_account.balance, amount, PAYMENT_KIND
+                )
+                if status_movement:
                     bank_account.save()
                     payment = payment_form.save(commit=False)
                     payment.ccc = card

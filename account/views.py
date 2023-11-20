@@ -6,7 +6,6 @@ from django.views.decorators.http import require_POST
 
 from bank_account.models import BankAccount
 from card.models import Card
-from payment.models import Payment
 from transaction.models import Transaction
 
 from .forms import ProfileEditForm, UserEditForm, UserRegistrationForm
@@ -28,7 +27,9 @@ def activity(request):
     transactions = []
 
     for bank_account in bank_accounts:
-        transaction = Transaction.objects.filter(Q(sender=bank_account.code) | Q(cac=bank_account))
+        transaction = Transaction.objects.filter(
+            Q(sender=bank_account.code) | Q(cac=bank_account.code)
+        )
         transactions.extend(transaction)
         cards.extend(bank_account.cards.all())
 
