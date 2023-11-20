@@ -2,6 +2,10 @@
 {% block title %}{{ section.title }}{% endblock %}
 {% block content %}
     <h1>My bank accounts</h1>
-    <p>You can create a new <a href="{% url 'bank_account:create' %}"> bank account</a></p>
     {% include 'bank_account/list.html' %}
+    <div class="containerbox">
+        <div class="box box--empty">
+            <div class="box__add"><a href="{% url "bank_account:create" %}">+</a></div>
+      </div>
+    </div>
 {% endblock %}

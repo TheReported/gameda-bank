@@ -3,8 +3,11 @@ import json
 import requests
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 from account.utils import Status, get_info_bank
@@ -21,12 +24,10 @@ def transaction_outgoing_proccess(request):
         transaction_form = TransactionForm(request.POST)
         if transaction_form.is_valid():
             cd = transaction_form.cleaned_data
+            cac = cd['cac']
             amount = cd['amount']
             sender = get_object_or_404(
                 BankAccount, code=cd['sender'], user=request.user, status=Status.ACTIVE
-            )
-            cac = get_object_or_404(
-                BankAccount, code=cd['cac'], user=request.user, status=Status.ACTIVE
             )
 
             if sender == cac:
@@ -47,7 +48,7 @@ def transaction_outgoing_proccess(request):
                     messages.success(request, "Your payment has been done successfully")
                     return redirect('transaction:done')
             else:
-                bank = get_info_bank(cd['cac'])
+                bank = get_info_bank(cac.code)
                 response = requests.post(f'{bank["url"]}/transaction/incoming', data=request.POST)
                 if response.status_code == 200:
                     if amount <= sender.balance:
@@ -75,21 +76,22 @@ def transaction_outgoing_proccess(request):
 
 
 @require_POST
+@csrf_exempt
 def transaction_inconming_proccess(request):
     data = json.loads(request.body)
     amount = float(data['amount'])
     try:
-        bank_account = BankAccount.active.get(id=data['cac'])
+        bank_account = BankAccount.active.get(code=data['cac'])
     except BankAccount.DoesNotExist:
         return HttpResponseForbidden('Bank account does not exists')
 
-    bank_account.balance += amount
+    bank_account.balance = float(bank_account.balance) + amount
     bank_account.balance = apply_comissions(bank_account.balance, amount, Transaction.Kind.INCOMING)
     bank_account.save()
     transaction = Transaction(
         sender=data['sender'],
         cac=bank_account,
-        concept=data['sender'],
+        concept=data['concept'],
         amount=amount,
         kind=Transaction.Kind.INCOMING,
     )
@@ -99,25 +101,22 @@ def transaction_inconming_proccess(request):
 
 @login_required
 def display_transaction(request):
-    all_transactions = {}
     bank_accounts = BankAccount.active.filter(user=request.user)
+    all_transactions = []
+
     for bank_account in bank_accounts:
-        try:
-            transactions = Transaction.objects.filter(
-                sender=bank_account.code
-            ) | Transaction.objects.filter(cac=bank_account.code)
-            for transaction in transactions:
-                if all_transactions.get(bank_account):
-                    all_transactions[bank_account].append(transaction)
-                else:
-                    all_transactions[bank_account] = [transaction]
-        except Transaction.DoesNotExist:
-            continue
-    transactions = [
-        transaction
-        for _, all_transactions in all_transactions.items()
-        for transaction in all_transactions
-    ]
+        transaction = Transaction.objects.filter(Q(sender=bank_account.code) | Q(cac=bank_account))
+        all_transactions.extend(transaction)
+
+    paginator = Paginator(all_transactions, 10)
+    page = request.GET.get("page")
+
+    try:
+        transactions = paginator.page(page)
+    except PageNotAnInteger:
+        transactions = paginator.page(1)
+    except EmptyPage:
+        transactions = paginator.page(paginator.num_pages)
     return render(
         request,
         'display_transaction.html',

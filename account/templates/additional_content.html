@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
+
+<div class="intro-header">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">   
+                    <h1 class="animated bounceInDown">¿Tienes menos de 18 años? Le regalamos 50€ </h1>
+                   
+                    <ul class="list-inline intro-social-buttons" id="headerButton">
+                        <li>
+                            <a href="{% url 'register' %}"><button id="button" class="animated bounceInUp btn btn-info btn-lg"> <span class="network-name">ABRA UNA CUENTA AHORA MISMO</span></button></a>
+                        </li>
+                       
+                    </ul>
+                  <div id="empty"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                
+                <div class="clearfix"></div>
+            <h2 class="section-heading">Uno de los bancos más seguros de España</h2>
+    <hr class="section-heading-spacer"> 
+    <br>
+    <br>
+    <br>
+        <p class="lead">Nuestro banco ofrece una seguridad de calidad teniendo un nivel de riesgo 1/6 significando esto que en cualquier momento estarán seguros en cualquier acción que realicen.</p>
+           
+            </div>
+            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                <img class=" img-responsive" src="{% static "img/locker.png" %}" id="responsive" alt=""/>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="content-section-b">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+               
+               
+            
+                <h2 class="section-heading">Casi sin comisiones</h2>
+<hr class="section-heading-spacer">        
+               <div class="clearfix"></div>
+              
+                <p class="lead">En Gameda a diferencia de otros bancos, nos preocupamos por nuestros clientes y por ello nuestras comisiones son mínimas e inexistentes el primer año en el que se abre la cuenta.</p>
+          
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <img class="img-responsive" src="{% static "img/porcentages.png" %}" alt="">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="content-section-c">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+
+                <h2 class="section-heading">Por un futuro mejor para todos</h2>
+                             
+<hr class="section-heading-spacer">        
+               <div class="clearfix"></div>  
+                <p class="lead">En nuestro banco nos centramos en darle una vida mejor a cada una de las personas que confían en nosotros dando una atención 24/7 por el medio que el cliente prefiera y teniendo en cuenta la situación de la persona desde el momento en el que abre la cuenta.</p>
+          
+            </div>
+            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+       <img class="img-responsive" src="{% static "img/reunion.jpg" %}" alt="">       
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-section-d">
+
+    <div class="container">
+
+        <div class="row">
+          
+            <div class="col-lg-5 col-sm-6">
+              
+                <h2 class="section-heading-white">Por nuestros mayores y los más jovenes</h2>
+                                 
+<hr class="section-heading-spacer-white">        
+               <div class="clearfix"></div>
+                <p class="lead-white">En Gameda queremos dar un futuro mejor a los grupos más vulnerables y por ello tenemos a disposición de esos grupos ayudas, becas seguros médicos y planes de ahorros...</p>
+              
+                <a href="{% url 'register' %}"><button id="button-white" class="animated bounceInUp btn btn-info btn-lg"> <span class="network-name">SE UNO MÁS DE NOSOTROS</span></button></a>
+        
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+              <img class="phone img-responsive" src="{% static "img/schollar.png" %}" alt="">       
+             
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

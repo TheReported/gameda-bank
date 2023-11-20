@@ -1,11 +1,14 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from account.utils import Status
 from bank_account.models import BankAccount
-from payment.models import Payment
+from card.utils import generate_pin
 
 from .forms import CardEditForm, CardForm
 from .models import Card
@@ -13,18 +16,17 @@ from .models import Card
 
 @login_required
 def detail(request, code):
-    card = get_object_or_404(Card, code=code, status=Status.ACTIVE)
-    payments = Payment.objects.filter(ccc=card.id)
+    card = get_object_or_404(Card, code=code, bank_account__user=request.user, status=Status.ACTIVE)
     return render(
         request,
         'card/detail.html',
-        {'section': 'cards', 'payments': payments, 'card': card},
+        {'section': 'cards', 'payments': card.payments_card.all(), 'card': card},
     )
 
 
 @login_required
 def display_card(request):
-    cards = Card.active.filter(user=request.user)
+    cards = Card.active.filter(bank_account__user=request.user)
     return render(
         request,
         'display_card.html',
@@ -41,10 +43,16 @@ def create(request):
             bank_account = get_object_or_404(
                 BankAccount, code=cd['bank_account'], user=request.user, status=Status.ACTIVE
             )
+            pin = generate_pin()
             card = card_form.save(commit=False)
-            card.user = request.user
             card.bank_account = bank_account
+            card.pin = make_password(pin)
             card.save()
+            subject = 'Gameda Bank'
+            message = f'You have created a new card with code {card.code} and pin {pin}'
+            from_email = settings.EMAIL_HOST_USER
+            to_email = [request.user.email]
+            send_mail(subject, message, from_email, to_email, fail_silently=False)
             messages.success(request, "You have created a Card successfully")
             return redirect('card:display')
 
@@ -66,7 +74,7 @@ def create_done(request):
 
 @login_required
 def edit(request, code):
-    card = get_object_or_404(Card, code=code, status=Status.ACTIVE)
+    card = get_object_or_404(Card, code=code, bank_account__user=request.user, status=Status.ACTIVE)
     if request.method == 'POST':
         card_edit_form = CardEditForm(instance=card, data=request.POST)
         if card_edit_form.is_valid():
@@ -75,7 +83,6 @@ def edit(request, code):
                 BankAccount, code=cd['bank_account'], user=request.user, status=Status.ACTIVE
             )
             card = card_edit_form.save(commit=False)
-            card.user = request.user
             card.bank_account = bank_account
             card.save()
             messages.success(request, 'You have edited your card successfully.')
@@ -93,7 +100,7 @@ def edit(request, code):
 @login_required
 @require_POST
 def discharge(request, code):
-    card = get_object_or_404(Card, code=code, status=Status.ACTIVE)
+    card = get_object_or_404(Card, code=code, status=Status.ACTIVE, bank_account__user=request.user)
     card.status = Status.DISCHARGE
     card.save()
     messages.success(request, 'You have discharge your bank account successfully')

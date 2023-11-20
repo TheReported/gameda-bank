@@ -1,6 +1,6 @@
 {% load static %}
 {% block content %}
-    {% for card in cards %}
+    {% if card %}
         <div class="card-container">
             <a href="{{ card.get_absolute_url }}"><div class="card">
                 <div class="card__number">{{ card.code }}</div>
@@ -22,7 +22,7 @@
             </div>
             </a>
         </div>
-    {% empty %}
-        <p>There are no cards created yet.</p>
-    {% endfor %}
+    {% else %}
+        <p> There are not cards created yet </p>
+    {% endif %}
 {% endblock %}

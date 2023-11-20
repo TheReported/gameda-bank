@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: white;
 
 }
 
@@ -72,7 +73,7 @@ ol {
 }
 #header ul.menu li {
     float:left;
-    padding:4px 10px;
+    padding:20px 20px;
     margin-left: 10px;
 }
 
@@ -83,6 +84,7 @@ ol {
 
 #header a {
     color:#f3f7cc;
+    text-decoration: none;
 }
 #header a:hover {
     color:#fff;
@@ -90,7 +92,7 @@ ol {
 
 #header .user {
     float:right;
-    padding-top:4px;
+    padding-top:15px;
 }
 
 #content {
@@ -301,19 +303,32 @@ table th {
         border-bottom: 0;
     }
 }
+
+.containercard {
+    float:left;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.card-container {
+    float:left;
+    padding-top: 20px;
+    padding-left: 10px;
+  }
+
 .card {
     position: relative;
+    display: flex;
+    flex-direction: column;
     background: radial-gradient(circle at 12.3% 19.3%, rgb(18, 151, 192) 0%, rgb(95, 209, 249) 100.2%);
     border-radius: 8px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1), 1px 1px 6px 0px rgba(0, 0, 0, 0.1);
     color: #fff;
-    display: inline-block;
     font-family: "Courier New", Monospace;
     font-weight: bold;
     height: 200px;
     overflow: hidden;
     padding: 20px;
-    position: relative;
     width: 325px;
     box-sizing: border-box;
 
@@ -351,6 +366,7 @@ table th {
     flex-grow: 1;
     margin-right: 10px;
 }
+
   
 .card--empty,
 .card__add {
@@ -395,4 +411,316 @@ footer {
 .foot-copy {
     padding-top: 11px;
     color: #333; 
+}
+
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+
+.box-container {
+  float:left;
+  padding-top: 20px;
+}
+
+.logobox {
+    width: 40px;
+    float: right;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 300px;
+  background: radial-gradient(circle at 12.3% 19.3%, rgb(18, 151, 192) 0%, rgb(95, 209, 249) 100.2%);
+  color: white;
+  border-radius: 8px;
+  padding: 0 30px;
+  margin-bottom: 40px;
+  margin-right: 40px;
+}
+
+.box-details {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.box-section {
+  flex: 0 0 50%;
+}
+
+.box-footer {
+  width: 100%;
+  border-top: 2px solid #f1f1f1;
+  margin-top: 30px;
+  align-self: flex-end;
+  text-align: center; 
+}
+
+.box-footer h4{
+    opacity: 0.6;
+}
+
+.box-footer h4:hover {
+    opacity: 2;
+  }
+
+.box-footer a {
+    font-weight: bold;
+    color: white; 
+}
+
+
+.containerbox {
+    padding-top: 20px;
+    display: block;
+}
+
+.box--empty,
+.box__add {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.box--empty {
+    background: none;
+    box-shadow: none;
+    border: 2px dashed #00AEEF;
+}
+.box__add {
+    background: #00AEEF;
+    border: 1px solid #04ADE4;
+    border-radius: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    height: 50px;
+    width: 50px;
+}
+
+.header {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.header img {
+    width: 400px;
+    display: inline-block;
+}
+
+.profile {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile img {
+    width: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-info h2, .profile-info p {
+    margin: 5px 0;
+}
+
+
+#brand{
+  
+    height: 43px;
+    width: 43px;
+  }
+  
+  .navigation{
+    margin: 0px 10px 0px 0px;
+    background: none;
+    border: none;
+  }
+  
+  .scrollNavigation{
+    margin: 0px 10px 0px 0px;
+    background: #333333;
+    border: none;
+    width: 100%;
+  }
+  
+  #menuText{
+    font-weight: 100;
+    font-size: 20px;
+    padding: 10px 30px 10px 0px;
+  }
+  
+  #navButton{
+     font-weight: 100;
+    font-size: 20px;
+    border: none;
+    padding: 10px 15px 15px 10px;
+    border-radius:0%;
+    background: #1297c0;
+  }
+  
+  #navButton:hover{
+    font-weight: 100;
+    font-size: 20px;
+    background: #1297c0;
+    border: none;
+    padding: 10px 15px 15px 10px;
+    border-radius:2%;
+  }
+  
+  
+  .intro-header {
+      padding-top: 50px; 
+      padding-bottom: 50px;
+      text-align: center;
+      color: #f8f8f8;
+      background:linear-gradient(
+        rgba(60, 199, 187, 0.70),
+        rgba(51, 163, 189, 0.80)
+      ),  url("https://static.pexels.com/photos/50987/money-card-business-credit-card-50987-large.jpeg");
+    background-size: cover;
+    
+  }
+  
+  .intro-message {
+      position: relative;
+      padding-top: 15%;
+      padding-bottom: 20%;
+  }
+  
+  .intro-message > h1 {
+      margin-top: -500;
+      font-size: 3em;
+      font-weight: 200;
+   
+  }
+  
+  
+  #button{
+    margin-top: 30px;
+    background: #1297c0;
+    border: none;
+    border-radius: 0%;
+    padding: 15px 15px 15px 15px;
+    
+  }
+  
+  #button-white{
+    margin-top: 30px;
+    background: white;
+    color: #1297c0;
+    border: none;
+    border-radius: 0%;
+    padding: 15px 15px 15px 15px;
+    
+  }
+  
+  
+  #button:hover{
+    margin-top: 30px;
+    border: none;
+    border-radius: 0%;
+    padding: 15px 15px 15px 15px;
+    
+  }
+  
+  .network-name {
+      text-transform: uppercase;
+      font-size: 17px;
+      font-weight: 500;
+      font-family: 'lato';
+      letter-spacing: 2px;
+  }
+  
+  .content-section-a {
+      padding: 80px 0;
+      background: #FCFBF9;
+  }
+  
+  .content-section-b {
+      padding: 50px 0;
+      background-color: white;
+     
+  }
+  
+  .content-section-c {
+      padding: 80px 0;
+      background: #FCFBF9;
+  }
+  
+  .content-section-d {
+      padding: 50px 0;
+      background-color: #1297c0;
+     
+  }
+  
+  .lead {
+      font-size: 20px;
+      font-weight: 400;
+      color: #333333;
+  }
+  .lead-white {
+      font-size: 26px;
+      font-weight: 400;
+  }
+  
+  .section-heading {
+      margin-bottom: 10px;
+      color: #333333;
+    
+  }
+  
+  .section-heading-white {
+      margin-bottom: 10px;
+    
+  }
+  
+  .section-heading-spacer {
+      float: left;
+      width: 100px;
+      border-top: 3px solid #1297c0;
+  }
+  
+  .section-heading-spacer-white {
+      float: left;
+      width: 100px;
+      border-top: 3px solid #ffffff;
+  }
+
+
+
+  
+.pagination ul {
+    margin: 2em auto;
+    padding-left: 0;
+    list-style-type: none;
+}
+  
+.page-number {
+    display: inline;
+}
+  
+.page-number a {
+    text-decoration: none;
+    color: black;
+}
+
+.pagination-3 .page-number {
+    margin: 0.25em;
+}
+  
+.pagination-3 .page-number a {
+    padding: 0.125em;
+}
+  
+.pagination-3 .active {
+    padding: 4px 8px;
+    border-radius: 50%;
+    background-color: #1297c0;
+    color: white;
+}
+  
+.pagination-3 .active a {
+    color: white;
 }

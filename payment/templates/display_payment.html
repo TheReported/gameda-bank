@@ -4,5 +4,5 @@
     <h1>My payments</h1>
     <p>You can make a <a href="{% url "payment:proccess" %}">payment</a></p>
     {% include 'payment/list.html' %}
-
+    {% include "pagination_payment.html" with page=payments %}
 {% endblock %}
