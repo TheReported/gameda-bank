@@ -3,3 +3,4 @@ requests
 prettyconf
 pillow
 easy-thumbnails
+WeasyPrint

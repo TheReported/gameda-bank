@@ -2,12 +2,15 @@ import json
 from decimal import Decimal
 
 import requests
+import weasyprint
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -138,3 +141,14 @@ def display_transaction(request):
 @login_required
 def transaction_done(request):
     return render(request, 'transaction/done.html', {'section': 'transactions'})
+
+
+def transaction_pdf(request, transaction_id):
+    transaction = get_object_or_404(Transaction, id=transaction_id)
+    html = render_to_string('transaction/pdf.html', {'transaction': transaction})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename=transaction_{transaction.id}.pdf'
+    weasyprint.HTML(string=html).write_pdf(
+        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / 'css/pdf.css')]
+    )
+    return response

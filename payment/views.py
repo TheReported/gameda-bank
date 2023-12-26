@@ -1,12 +1,15 @@
 import json
 from decimal import Decimal
 
+import weasyprint
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 
 from account.utils import Status
@@ -110,3 +113,14 @@ def display_payment(request):
 @login_required
 def payment_done(request):
     return render(request, 'payment/done.html', {'section': 'payments'})
+
+
+def payment_pdf(request, payment_id):
+    payment = get_object_or_404(Payment, id=payment_id)
+    html = render_to_string('payment/pdf.html', {'payment': payment})
+    response = HttpResponse(content_type='payment/pdf')
+    response['Content-Disposition'] = f'filename=payment_{payment.id}.pdf'
+    weasyprint.HTML(string=html).write_pdf(
+        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / 'css/pdf.css')]
+    )
+    return response
