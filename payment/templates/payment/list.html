@@ -8,6 +8,7 @@
                     <th scope="col">Card</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Created</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +18,9 @@
                         <td data-label="Card">{{ payment.ccc }}</td>
                         <td data-label="Amount">€{{ payment.amount }}</td>
                         <td data-label="Created">{{ payment.created }}</td>
+                        <td data-label="Actions">
+                            <a href="{% url 'payment:pdf' payment.id %}" target="_blank">Download PDF</a>
+                        </td>
                     </tr>
                 {% empty %}
                 {% endfor %}

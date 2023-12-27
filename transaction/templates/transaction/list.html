@@ -9,6 +9,7 @@
                     <th scope="col">Concept</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Created</th>
+                    <th scope="col">Actions</th>  
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,9 @@
                         <td data-label="CAC">{{ transaction.concept|truncatewords:30 }}</td>
                         <td data-label="Amount">€{{ transaction.amount }}</td>
                         <td data-label="Created">{{ transaction.timeStamp }}</td>
+                        <td data-label="Actions">
+                            <a href="{% url 'transaction:pdf' transaction.id %}" target="_blank">Download PDF</a>
+                        </td>
                     </tr>
                 {% empty %}
                 {% endfor %}
