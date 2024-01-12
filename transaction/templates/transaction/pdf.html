@@ -1,1 +1,32 @@
-hola
+<html>
+<body>
+  <h1>Gameda Bank</h1>
+  <p>
+    Transaction ID: {{ transaction.id }}<br>
+    <span class="secondary">
+      {{ transaction.timeStamp|date:"M d, Y" }}
+    </span>
+  </p>
+  <h3>Sender Information</h3>
+  <p>
+    Sender: {{ transaction.sender }}<br>
+    CAC: {{ transaction.cac }}<br>
+    Amount: €{{ transaction.amount }}
+  </p>
+  <h3>Transaction Details</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Concept</th>
+        <th>Kind</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ transaction.concept }}</td>
+        <td>{{ transaction.get_kind_display }}</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
