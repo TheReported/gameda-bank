@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
@@ -57,8 +58,8 @@ def create_done(request):
 def detail(request, code):
     bank_account = get_object_or_404(BankAccount, code=code, status=Status.ACTIVE)
     cards = Card.active.filter(bank_account=bank_account)
-    transactions = Transaction.objects.filter(sender=code) | Transaction.objects.filter(
-        cac__code=code
+    transactions = Transaction.objects.filter(
+        Q(sender=bank_account.code) | Q(cac=bank_account.code)
     )
 
     if bank_account:
