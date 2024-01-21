@@ -1,14 +1,15 @@
 {% extends "base.html" %}
-{% block title %}Edit your bank account{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Edit your bank account" %}{% endblock %}
 {% block content %}
-    <h1>Edit your bank account</h1>
+    <h1>{% trans "Edit your bank account" %}</h1>
     <form action="{% url "bank_account:bank_account_edit" bank_account.code %}" method="post">
         {{ bank_account_edit_form.as_p }}
         {% csrf_token %}
-        <p><input type="submit" value="Save changes"></p>
+        <p><input type="submit" value="{% trans "Save changes" %}"></p>
     </form>
     <form action="{% url "bank_account:discharge" bank_account.code %}" method="post">
         {% csrf_token %}
-        <p><button type="submit">Discharge account</button></p>
+        <p><button type="submit">{% trans "Discharge account" %}</button></p>
     </form>
 {% endblock %}

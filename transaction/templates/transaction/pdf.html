@@ -1,24 +1,25 @@
+{% load i18n %}
 <html>
 <body>
   <h1>Gameda Bank</h1>
   <p>
-    Transaction ID: {{ transaction.id }}<br>
+    {% trans "Transaction ID" %}: {{ transaction.id }}<br>
     <span class="secondary">
       {{ transaction.timeStamp|date:"M d, Y" }}
     </span>
   </p>
-  <h3>Sender Information</h3>
+  <h3>{% trans "Sender Information" %}</h3>
   <p>
-    Sender: {{ transaction.sender }}<br>
+    {% trans "Sender" %}: {{ transaction.sender }}<br>
     CAC: {{ transaction.cac }}<br>
-    Amount: €{{ transaction.amount }}
+    {% trans "Amount" %}: €{{ transaction.amount }}
   </p>
-  <h3>Transaction Details</h3>
+  <h3>{% trans "Transaction Details" %}</h3>
   <table>
     <thead>
       <tr>
-        <th>Concept</th>
-        <th>Kind</th>
+        <th>{% trans "Concept" %}</th>
+        <th>{% trans "Kind" %}</th>
       </tr>
     </thead>
     <tbody>

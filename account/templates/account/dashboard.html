@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Activity{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Activity" %}{% endblock %}
 {% block content %}
     {% load dashboard_tags %}
     {% load static %}
-    <h1>Activity</h1>
-    <p>Welcome to your activity.</p>
+    <h1>{% trans "Activity" %}</h1>
+    <p>{% trans "Welcome to your activity" %}.</p>
     <div>
         <img src="{% if user.profile.photo %} {{ user.profile.photo.url }}{% else %} {% static "img/avatar.png" %}{% endif %}" class="profile-photo-edit">       
     </div>

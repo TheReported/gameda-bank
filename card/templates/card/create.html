@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Create Card{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Create Card" %}{% endblock %}
 {% block content %}
-    <h2>Create a new card</h2>
+    <h2>{% trans "Create Card" %}</h2>
     <form action="{% url "card:create" %}" method="post">
         {{ card_form.as_p }}
         {% csrf_token %}
-        <p><input type="submit" value="Create"></p>
+        <p><input type="submit" value="{% trans "Create" %}"></p>
     </form>
 {% endblock %}

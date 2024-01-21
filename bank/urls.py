@@ -29,6 +29,7 @@ urlpatterns = [
     path('', acc_views.show_main, name='main'),
     path('payment/', payment_views.payment_curl_proccess, name='payment_curl_proccess'),
     path('transfer/incoming/', transaction_views.transaction_inconming_proccess, name='incoming'),
+    path('rosetta/', include('rosetta.urls')),
 ]
 
 if settings.DEBUG:

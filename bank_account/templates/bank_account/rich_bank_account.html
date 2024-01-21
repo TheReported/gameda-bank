@@ -1,19 +1,20 @@
 {% load static %}
+{% load i18n %}
 {% block content %}
     {% if bank_account %}
         <div class="box-container">
             <div class="box">
             <h1> {{ bank_account.alias }} <img src="{% static 'img/logo.png' %}" class="logobox"> </h1> 
-            <p>Code: {{ bank_account.code }} </p>
+            <p>{% trans "Code" %}: {{ bank_account.code }} </p>
             <br>
-            <p>Current Balance: {{ bank_account.balance }} </p>
+            <p>{% trans "Current Balance" %}: {{ bank_account.balance }} </p>
         
             <div class="box-footer">
-                <h4><a href="{{ bank_account.get_absolute_url }}">See Details</a></h4>
+                <h4><a href="{{ bank_account.get_absolute_url }}">{% trans "See Details" %}</a></h4>
             </div>
             </div>
         </div>
     {% else %}
-        <p> There are not bank accounts created yet </p>
+        <p>{% trans "There are not bank accounts created yet" %}.</p>
     {% endif %}
 {% endblock %}

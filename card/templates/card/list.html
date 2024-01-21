@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% block content %}
     {% for card in cards %}
         <div class="card-container">
@@ -23,6 +24,6 @@
             </a>
         </div>
     {% empty %}
-        <p>There are no cards created yet.</p>
+        <p>{% trans "There are no cards created yet" %}.</p>
     {% endfor %}
 {% endblock %}

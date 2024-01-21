@@ -1,6 +1,11 @@
 {% extends "base.html" %}
-{% block title %} {{section.title}} - Done {% endblock title %}
+{% load i18n %}
+{% block title %} 
+    {% blocktrans %}
+        {{ section.title }} - Done
+    {% endblocktrans %}
+{% endblock title %}
 {% block content %}
-    <p>The account has been created successfully.</p>
+    <p>{% trans "The account has been created successfully." %}</p>
 {% endblock content %}
 

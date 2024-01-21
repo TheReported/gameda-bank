@@ -1,8 +1,16 @@
 {% extends "base.html" %}
-{% block title %}{{ section.title }}{% endblock %}
+{% load i18n %}
+{% block title %}
+    {% blocktrans %}
+        {{ section.title }}
+    {% endblocktrans %}
+{% endblock %}
 {% block content %}
-    <h1>My payments</h1>
-    <p>You can make a <a href="{% url "payment:proccess" %}">payment</a></p>
+    <h1>{% trans "My payments" %}</h1>
+
+    <p>
+        {% trans "You can make a" %} <a href="{% url "payment:proccess" %}">{% trans "payment" %}</a>
+    </p>
     {% include 'payment/list.html' %}
     {% include "pagination_payment.html" with page=payments %}
 {% endblock %}

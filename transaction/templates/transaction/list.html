@@ -1,15 +1,16 @@
+{% load i18n %}
 {% block content %}
     <div class="transaction">
         <table class="caption-top">
-            <caption>Transactions Summary</caption>
+            <caption>{% trans "Transactions Summary" %}</caption>
             <thead>
                 <tr>
-                    <th scope="col">Sender</th>
+                    <th scope="col">{% trans "Sender" %}</th>
                     <th scope="col">CAC</th>
-                    <th scope="col">Concept</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">Actions</th>  
+                    <th scope="col">{% trans "Concept" %}</th>
+                    <th scope="col">{% trans "Amount" %}</th>
+                    <th scope="col">{% trans "Created" %}</th>
+                    <th scope="col">{% trans "Actions" %}</th>  
                 </tr>
             </thead>
             <tbody>
@@ -17,11 +18,11 @@
                     <tr>
                         <td data-label="Sender">{{ transaction.sender }}</td>
                         <td data-label="CAC">{{ transaction.cac }}</td>
-                        <td data-label="CAC">{{ transaction.concept|truncatewords:30 }}</td>
+                        <td data-label="Concept">{{ transaction.concept|truncatewords:30 }}</td>
                         <td data-label="Amount">€{{ transaction.amount }}</td>
                         <td data-label="Created">{{ transaction.timeStamp }}</td>
                         <td data-label="Actions">
-                            <a href="{% url 'transaction:pdf' transaction.id %}" target="_blank">Download PDF</a>
+                            <a href="{% url 'transaction:pdf' transaction.id %}" target="_blank">{% trans "Download" %} PDF</a>
                         </td>
                     </tr>
                 {% empty %}

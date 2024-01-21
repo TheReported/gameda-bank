@@ -1,22 +1,23 @@
+{% load i18n %}
 <html>
 <body>
   <h1>Gameda Bank</h1>
   <p>
-    Payment ID: {{ payment.id }}<br>
+    {% trans "Payment ID" %}: {{ payment.id }}<br>
     <span class="secondary">
       {{ payment.created|date:"M d, Y" }}
     </span>
   </p>
-  <h3>Payment Information</h3>
+  <h3>{% trans "Payment Information" %}</h3>
   <p>
-    Card Number: {{ payment.ccc }}<br>
-    Amount: €{{ payment.amount }}
+    {% trans "Card Number" %}: {{ payment.ccc }}<br>
+    {% trans "Amount" %}: €{{ payment.amount }}
   </p>
-  <h3>Payment Details</h3>
+  <h3>{% trans "Payment Details" %}</h3>
   <table>
     <thead>
       <tr>
-        <th>Concept</th>
+        <th>{% trans "Concept" %}</th>
       </tr>
     </thead>
     <tbody>

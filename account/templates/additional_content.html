@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
@@ -11,11 +12,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="intro-message">   
-                    <h1 class="animated bounceInDown">¿Do you have less than 18? We gift you 50€ </h1>
+                    <h1 class="animated bounceInDown">{% trans "Do you have less than 18? We gift you 50€" %}</h1>
                    
                     <ul class="list-inline intro-social-buttons" id="headerButton">
                         <li>
-                            <a href="{% url 'register' %}"><button id="button" class="animated bounceInUp btn btn-info btn-lg"> <span class="network-name">OPEN AN ACCOUNT RIGHT NOW</span></button></a>
+                            <a href="{% url 'register' %}"><button id="button" class="animated bounceInUp btn btn-info btn-lg"> <span class="network-name">{% trans "OPEN AN ACCOUNT RIGHT NOW" %}</span></button></a>
                         </li>
                        
                     </ul>
@@ -31,12 +32,12 @@
             <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                 
                 <div class="clearfix"></div>
-            <h2 class="section-heading">One of the most safe banks of Spain</h2>
+            <h2 class="section-heading">{% trans "One of the most safe banks of Spain" %}</h2>
     <hr class="section-heading-spacer"> 
     <br>
     <br>
     <br>
-        <p class="lead">Our bank offers a quality security having a risk level of 1/6 meaning that at any time you will be safe in any action you take.</p>
+        <p class="lead">{% trans "Our bank offers a quality security having a risk level of 1/6 meaning that at any time you will be safe in any action you take" %}.</p>
            
             </div>
             <div class="col-lg-5 col-sm-pull-6  col-sm-6">
@@ -57,11 +58,11 @@
                
                
             
-                <h2 class="section-heading">Almost no commissions</h2>
+                <h2 class="section-heading">{% trans "Almost no commissions" %}</h2>
 <hr class="section-heading-spacer">        
                <div class="clearfix"></div>
               
-                <p class="lead">In Gameda, unlike other banks, we care about our customers and therefore our commissions are minimal and non-existent the first year in which the account is opened.</p>
+                <p class="lead">{% trans "In Gameda, unlike other banks, we care about our customers and therefore our commissions are minimal and non-existent the first year in which the account is opened" %}.</p>
           
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">
@@ -80,11 +81,11 @@
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
 
-                <h2 class="section-heading">For a better future for all</h2>
+                <h2 class="section-heading">{% trans "For a better future for all" %}</h2>
                              
 <hr class="section-heading-spacer">        
                <div class="clearfix"></div>  
-                <p class="lead">In our bank we focus on giving a better life to each of the people who trust us by giving 24/7 attention by the means that the customer prefers and taking into account the situation of the person from the moment he/she opens the account.</p>
+                <p class="lead">{% trans "In our bank we focus on giving a better life to each of the people who trust us by giving 24/7 attention by the means that the customer prefers and taking into account the situation of the person from the moment he/she opens the account" %}.</p>
           
             </div>
             <div class="col-lg-5 col-sm-pull-6  col-sm-6">
@@ -101,13 +102,13 @@
           
             <div class="col-lg-5 col-sm-6">
               
-                <h2 class="section-heading-white">For our elders and the youngest</h2>
+                <h2 class="section-heading-white">{% trans "For our elders and the youngest" %}</h2>
                                  
 <hr class="section-heading-spacer-white">        
                <div class="clearfix"></div>
-                <p class="lead-white">At Gameda we want to give a better future to the most vulnerable groups and for this reason we have at the disposal of these groups aid, scholarships, medical insurance and savings plans...</p>
+                <p class="lead-white"> {% trans "At Gameda we want to give a better future to the most vulnerable groups and for this reason we have at the disposal of these groups aid, scholarships, medical insurance and savings plans" %}...</p>
               
-                <a href="{% url 'register' %}"><button id="button-white" class="animated bounceInUp btn btn-info btn-lg"> <span class="network-name">BE ONE OF US </span></button></a>
+                <a href="{% url 'register' %}"><button id="button-white" class="animated bounceInUp btn btn-info btn-lg"> <span class="network-name">{% trans "BE ONE OF US" %} </span></button></a>
         
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">

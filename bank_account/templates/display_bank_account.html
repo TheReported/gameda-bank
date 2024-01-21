@@ -1,7 +1,12 @@
 {% extends "base.html" %}
-{% block title %}{{ section.title }}{% endblock %}
+{% load i18n %}
+{% block title %}
+    {% blocktrans %}
+        {{ section.title }}
+    {% endblocktrans %}
+{% endblock %}
 {% block content %}
-    <h1>My bank accounts</h1>
+    <h1>{% trans "My bank accounts" %}</h1>
     {% include 'bank_account/list.html' %}
     <div class="containerbox">
         <div class="box box--empty">

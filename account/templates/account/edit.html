@@ -1,19 +1,22 @@
 {% extends "base.html" %}
-{% block title %}Edit your account{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Edit your account" %}{% endblock %}
 {% block content %}
     {% load static %}
-    <h1>Edit your account</h1>
-    <p>You can <a href="{% url "password_change" %}">change your password</a> but also you can edit your account using the following form:</p>
+    <h1>{% trans "Edit your account" %}</h1>
+    <p>
+        {% trans "You can" %} <a href="{% url "password_change" %}">{% trans "change your password" %}</a> {% trans "but also you can edit your account using the following form" %}:
+    </p>
     <img src="{% if user.profile.photo %} {{ user.profile.photo.url }}{% else %} {% static "img/avatar.png" %}{% endif %}" class="profile-photo-edit">
 
     <form method="post" enctype="multipart/form-data">
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
         {% csrf_token %}
-        <p><input type="submit" value="Save changes"></p>
+        <p><input type="submit" value="{% trans "Save changes" %}"></p>
     </form>
     <form action="{% url "discharge"%}" method="post">
         {% csrf_token %}
-        <p><button type="submit">Discharge account</button></p>
+        <p><button type="submit">{% trans "Discharge account" %}</button></p>
     </form>
 {% endblock %}

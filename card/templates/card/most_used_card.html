@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% block content %}
     {% if card %}
         <div class="card-container">
@@ -23,6 +24,6 @@
             </a>
         </div>
     {% else %}
-        <p> There are not cards created yet </p>
+        <p> {% trans "There are not cards created yet" %}. </p>
     {% endif %}
 {% endblock %}
