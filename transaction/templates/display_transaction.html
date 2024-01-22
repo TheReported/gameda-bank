@@ -11,6 +11,9 @@
     <p>
         {% trans "You can make a" %} <a href="{% url "transaction:outgoing" %}">{% trans "transaction" %}</a>
     </p>
+    <p>
+        {% trans "You can download all your" %} <a href="{% url 'transaction:all_csv' %}" target="_blank">CSVs</a>
+    </p>
     {% include 'transaction/list.html' %}
     {% include "pagination_transaction.html" with page=transactions %}
 {% endblock %}
