@@ -30,6 +30,7 @@ urlpatterns = [
     path('payment/', payment_views.payment_curl_proccess, name='payment_curl_proccess'),
     path('transfer/incoming/', transaction_views.transaction_inconming_proccess, name='incoming'),
     path('rosetta/', include('rosetta.urls')),
+    path('api/', include('bank.router', namespace='api')),
 ]
 
 if settings.DEBUG:

@@ -4,5 +4,5 @@ prettyconf
 pillow
 easy-thumbnails
 WeasyPrint
-rest_framework
 django-rosetta
+djangorestframework

@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from account.utils import Status
 from bank_account.models import BankAccount
-from bank_account.utils import apply_movement
+from bank_account.utils import apply_movement, export_to_csv
 from card.models import Card
 
 from .forms import PaymentForm
@@ -123,4 +123,10 @@ def payment_pdf(request, payment_id):
     weasyprint.HTML(string=html).write_pdf(
         response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / 'css/pdf.css')]
     )
+    return response
+
+
+def payment_csv(request, payment_id):
+    response = export_to_csv(request, queryset=Payment.objects.filter(id=payment_id))
+
     return response

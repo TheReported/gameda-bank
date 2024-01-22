@@ -16,7 +16,7 @@ from django.views.decorators.http import require_POST
 
 from account.utils import Status, get_info_bank
 from bank_account.models import BankAccount
-from bank_account.utils import apply_movement
+from bank_account.utils import apply_movement, export_to_csv
 
 from .forms import TransactionForm
 from .models import Transaction
@@ -151,4 +151,16 @@ def transaction_pdf(request, transaction_id):
     weasyprint.HTML(string=html).write_pdf(
         response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / 'css/pdf.css')]
     )
+    return response
+
+
+def transaction_csv(request, transaction_id):
+    response = export_to_csv(request, queryset=Transaction.objects.filter(id=transaction_id))
+
+    return response
+
+
+def all_transaction_csv(request):
+    response = export_to_csv(request, Transaction.objects.filter(cac=request.user.id))
+
     return response
