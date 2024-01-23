@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-21 14:18+0000\n"
+"POT-Creation-Date: 2024-01-22 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: account/templates/account/dashboard.html:3
 #: account/templates/account/dashboard.html:7 account/templates/header.html:9
 msgid "Activity"
@@ -128,15 +129,19 @@ msgstr ""
 msgid "Payments"
 msgstr ""
 
-#: account/templates/header.html:27
+#: account/templates/header.html:30
+msgid "Language"
+msgstr ""
+
+#: account/templates/header.html:43
 msgid "Hello"
 msgstr ""
 
-#: account/templates/header.html:31
+#: account/templates/header.html:47
 msgid "Logout"
 msgstr ""
 
-#: account/templates/header.html:33
+#: account/templates/header.html:49
 msgid "Login"
 msgstr ""
 
@@ -309,6 +314,14 @@ msgstr ""
 msgid "log in"
 msgstr ""
 
+#: bank/settings.py:122
+msgid "English"
+msgstr ""
+
+#: bank/settings.py:123
+msgid "Spanish"
+msgstr ""
+
 #: bank_account/templates/bank_account/create.html:3
 #: bank_account/templates/bank_account/create.html:6
 msgid "Create bank account"
@@ -438,6 +451,11 @@ msgstr ""
 msgid "payment"
 msgstr ""
 
+#: payment/templates/display_payment.html:15
+#: transaction/templates/display_transaction.html:15
+msgid "You can download all your"
+msgstr ""
+
 #: payment/templates/pagination_payment.html:6
 #: transaction/templates/pagination_transaction.html:6
 msgid "Previous"
@@ -479,13 +497,11 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: payment/templates/payment/list.html:12
-#: transaction/templates/transaction/list.html:13
-msgid "Actions"
-msgstr ""
-
-#: payment/templates/payment/list.html:23
-msgid "Download "
+#: payment/templates/payment/list.html:24
+#: payment/templates/payment/list.html:27
+#: transaction/templates/transaction/list.html:26
+#: transaction/templates/transaction/list.html:29
+msgid "Download"
 msgstr ""
 
 #: payment/templates/payment/pdf.html:6
@@ -533,10 +549,6 @@ msgstr ""
 #: transaction/templates/transaction/list.html:8
 #: transaction/templates/transaction/pdf.html:13
 msgid "Sender"
-msgstr ""
-
-#: transaction/templates/transaction/list.html:25
-msgid "Download"
 msgstr ""
 
 #: transaction/templates/transaction/pdf.html:6

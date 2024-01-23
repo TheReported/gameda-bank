@@ -8,98 +8,110 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-21 14:18+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2024-01-22 16:24+0000\n"
+"PO-Revision-Date: 2024-01-22 16:30+0000\n"
+"Last-Translator:   <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
+
 #: account/templates/account/dashboard.html:3
 #: account/templates/account/dashboard.html:7 account/templates/header.html:9
 msgid "Activity"
-msgstr ""
+msgstr "Actividad"
 
 #: account/templates/account/dashboard.html:8
 msgid "Welcome to your activity"
-msgstr ""
+msgstr "Bienvenido a tu actividad"
 
 #: account/templates/account/edit.html:3 account/templates/account/edit.html:6
 msgid "Edit your account"
-msgstr ""
+msgstr "Edita tu cuenta"
 
 #: account/templates/account/edit.html:8
 #: account/templates/registration/logged_out.html:8
 #: account/templates/registration/password_reset_complete.html:7
 msgid "You can"
-msgstr ""
+msgstr "Usted puede"
 
 #: account/templates/account/edit.html:8
 msgid "change your password"
-msgstr ""
+msgstr "cambiar su contraseña"
 
 #: account/templates/account/edit.html:8
 msgid "but also you can edit your account using the following form"
-msgstr ""
+msgstr "pero también puede editar su cuenta usando el siguiente formulario"
 
 #: account/templates/account/edit.html:16
 #: bank_account/templates/bank_account/edit.html:9
 #: card/templates/card/edit.html:9
 msgid "Save changes"
-msgstr ""
+msgstr "Guardar cambios"
 
 #: account/templates/account/edit.html:20
 #: bank_account/templates/bank_account/edit.html:13
 #: card/templates/card/edit.html:13
 msgid "Discharge account"
-msgstr ""
+msgstr "Cerrar cuenta"
 
 #: account/templates/additional_content.html:15
 msgid "Do you have less than 18? We gift you 50€"
-msgstr ""
+msgstr "¿Tiene usted menos de 18 años? Le regalamos 50€"
 
 #: account/templates/additional_content.html:19
 msgid "OPEN AN ACCOUNT RIGHT NOW"
-msgstr ""
+msgstr "ABRA UNA CUENTA AHORA MISMO"
 
 #: account/templates/additional_content.html:35
 msgid "One of the most safe banks of Spain"
-msgstr ""
+msgstr "Uno de los bancos más seguros de España"
 
 #: account/templates/additional_content.html:40
 msgid ""
 "Our bank offers a quality security having a risk level of 1/6 meaning that "
 "at any time you will be safe in any action you take"
 msgstr ""
+"Nuestro banco ofrece una seguridad de calidad con un nivel de riesgo de 1/6,"
+" lo que significa que en todo momento estará seguro en cualquier acción que "
+"realice"
 
 #: account/templates/additional_content.html:61
 msgid "Almost no commissions"
-msgstr ""
+msgstr "Casi sin comisiones"
 
 #: account/templates/additional_content.html:65
 msgid ""
-"In Gameda, unlike other banks, we care about our customers and therefore our "
-"commissions are minimal and non-existent the first year in which the account "
-"is opened"
+"In Gameda, unlike other banks, we care about our customers and therefore our"
+" commissions are minimal and non-existent the first year in which the "
+"account is opened"
 msgstr ""
+"En Gameda, a diferencia de otros bancos, nos preocupamos por nuestros "
+"clientes y por ello nuestras comisiones son mínimas e inexistentes el primer"
+" año en el que se abre la cuenta"
 
 #: account/templates/additional_content.html:84
 msgid "For a better future for all"
-msgstr ""
+msgstr "Por un mejor futuro para todos"
 
 #: account/templates/additional_content.html:88
 msgid ""
-"In our bank we focus on giving a better life to each of the people who trust "
-"us by giving 24/7 attention by the means that the customer prefers and "
-"taking into account the situation of the person from the moment he/she opens "
-"the account"
+"In our bank we focus on giving a better life to each of the people who trust"
+" us by giving 24/7 attention by the means that the customer prefers and "
+"taking into account the situation of the person from the moment he/she opens"
+" the account"
 msgstr ""
+"En nuestro banco nos enfocamos en darle una mejor vida a cada una de las "
+"personas que confían en nosotros dando atención 24/7 por el medio que el "
+"cliente prefiera y tomando en cuenta la situación de la persona desde el "
+"momento en que abre la cuenta"
 
 #: account/templates/additional_content.html:105
 msgid "For our elders and the youngest"
-msgstr ""
+msgstr "Por nuestros mayores y los más jovenes"
 
 #: account/templates/additional_content.html:109
 msgid ""
@@ -107,56 +119,63 @@ msgid ""
 "for this reason we have at the disposal of these groups aid, scholarships, "
 "medical insurance and savings plans"
 msgstr ""
+"En Gameda queremos dar un futuro mejor a los colectivos más vulnerables y "
+"por eso ponemos a su disposición ayudas, becas, seguros médicos y planes de "
+"ahorro"
 
 #: account/templates/additional_content.html:111
 msgid "BE ONE OF US"
-msgstr ""
+msgstr "SE UNO DE NOSOTROS"
 
 #: account/templates/header.html:12
 msgid "Accounts"
-msgstr ""
+msgstr "Cuentas"
 
 #: account/templates/header.html:15
 msgid "Transactions"
-msgstr ""
+msgstr "Transacciones"
 
 #: account/templates/header.html:18
 msgid "Cards"
-msgstr ""
+msgstr "Tarjetas"
 
 #: account/templates/header.html:21
 msgid "Payments"
-msgstr ""
+msgstr "Pagos"
 
-#: account/templates/header.html:27
+#: account/templates/header.html:30
+msgid "Language"
+msgstr "Idioma"
+
+#: account/templates/header.html:43
 msgid "Hello"
-msgstr ""
+msgstr "Hola"
 
-#: account/templates/header.html:31
+#: account/templates/header.html:47
 msgid "Logout"
-msgstr ""
+msgstr "Cerrar Sesión"
 
-#: account/templates/header.html:33
+#: account/templates/header.html:49
 msgid "Login"
-msgstr ""
+msgstr "Iniciar Sesión"
 
 #: account/templates/registration/logged_out.html:3
 #: account/templates/registration/logged_out.html:5
 msgid "Logged out"
-msgstr ""
+msgstr "Sesión Cerrada"
 
 #: account/templates/registration/logged_out.html:7
 msgid "You have been successfully logged out"
-msgstr ""
+msgstr "Usted ha cerrado la sesión satisfactoriamente."
 
 #: account/templates/registration/logged_out.html:8
 msgid "log-in again"
-msgstr ""
+msgstr "iniciar sesión de nuevo"
 
 #: account/templates/registration/login.html:3
 #: account/templates/registration/login.html:5
 msgid "Log-in"
-msgstr ""
+msgstr "Iniciar Sesión"
 
 #: account/templates/registration/login.html:8
 msgid ""
@@ -165,58 +184,61 @@ msgid ""
 "                Please try again.\n"
 "            "
 msgstr ""
+"\n"
+"Tu nombre de usuario y contraseña no coinciden.\n"
+"Por favor, inténtelo de nuevo."
 
 #: account/templates/registration/login.html:15
 msgid "Please, use the following form to log-in"
-msgstr ""
+msgstr "Utilice el siguiente formulario para iniciar sesión"
 
 #: account/templates/registration/login.html:16
 msgid "If you don't have an account"
-msgstr ""
+msgstr "Si no tiene una cuenta"
 
 #: account/templates/registration/login.html:16
 msgid "register here"
-msgstr ""
+msgstr "regístrese aquí"
 
 #: account/templates/registration/login.html:28
 #: account/templates/registration/password_reset_form.html:5
 msgid "Forgotten your password?"
-msgstr ""
+msgstr "¿Se ha olvidado de su contraseña?"
 
 #: account/templates/registration/password_change_done.html:3
 #: account/templates/registration/password_change_done.html:5
 msgid "Password changed"
-msgstr ""
+msgstr "Contraseña cambiada"
 
 #: account/templates/registration/password_change_done.html:6
 msgid "Your password has been successfully changed"
-msgstr ""
+msgstr "Su contraseña ha sido cambiada satisfactoriamente"
 
 #: account/templates/registration/password_change_form.html:3
 #: account/templates/registration/password_change_form.html:5
 msgid "Change your password"
-msgstr ""
+msgstr "Cambie su contraseña"
 
 #: account/templates/registration/password_change_form.html:6
 msgid "Use the form below to change your password"
-msgstr ""
+msgstr "Usa el siguiente formulario para cambiar su contraseña"
 
 #: account/templates/registration/password_change_form.html:9
 msgid "Change"
-msgstr ""
+msgstr "Cambiar"
 
 #: account/templates/registration/password_reset_complete.html:3
 #: account/templates/registration/password_reset_complete.html:5
 msgid "Password reset"
-msgstr ""
+msgstr "Restablecer contraseña"
 
 #: account/templates/registration/password_reset_complete.html:7
 msgid "Your password has been reset"
-msgstr ""
+msgstr "Su contraseña ha sido restablecida"
 
 #: account/templates/registration/password_reset_complete.html:7
 msgid "log in now"
-msgstr ""
+msgstr "inicie sesión ahora"
 
 #: account/templates/registration/password_reset_confirm.html:3
 #: account/templates/registration/password_reset_confirm.html:5
@@ -224,70 +246,79 @@ msgstr ""
 #: account/templates/registration/password_reset_done.html:6
 #: account/templates/registration/password_reset_form.html:3
 msgid "Reset your password"
-msgstr ""
+msgstr "Restablecer contraseña"
 
 #: account/templates/registration/password_reset_confirm.html:7
 msgid "Please enter your new password twice"
-msgstr ""
+msgstr "Por favor, introduzca su nueva contraseña dos veces"
 
 #: account/templates/registration/password_reset_confirm.html:11
 msgid "Change my password"
-msgstr ""
+msgstr "Cambiar mi contraseña"
 
 #: account/templates/registration/password_reset_confirm.html:15
 msgid ""
 "\n"
-"                The password reset link was invalid, possibly because it has "
-"already\n"
+"                The password reset link was invalid, possibly because it has already\n"
 "                been used. Please request a new password reset.\n"
 "            "
 msgstr ""
+"\n"
+"El enlace de restablecimiento de contraseña no era válido, posiblemente porque ya se ha utilizado. Solicite un nuevo restablecimiento de contraseña."
 
 #: account/templates/registration/password_reset_done.html:8
 msgid "We've emailed you instructions for setting your password"
 msgstr ""
+"Le hemos enviado por correo electrónico instrucciones para establecer su "
+"contraseña"
 
 #: account/templates/registration/password_reset_done.html:9
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with"
 msgstr ""
+"Si no recibe un correo electrónico, asegúrese de que ha introducido la "
+"dirección con la que se registró"
 
 #: account/templates/registration/password_reset_email.html:2
 #, python-format
 msgid ""
 "\n"
-"    Someone asked for password reset for email %(email)s. Follow the link "
-"below:\n"
+"    Someone asked for password reset for email %(email)s. Follow the link below:\n"
 "    %(protocol)s://%(domain)s{%% url \"password_reset_confirm\" uidb64=uid\n"
 "    token=token %%}\n"
 "    Your username, in case you've forgotten: %(user.get_username)s\n"
 msgstr ""
+"\n"
+"Alguien preguntó por el restablecimiento de contraseña para el email %(email)s. Siga el siguiente enlace:\n"
+"%(protocol)s://%(domain)s{%% url \"password_reset_confirm\" uidb64=uid\n"
+"token=token %%}\n"
+"Tu nombre de usuario, por si lo has olvidado: %(user.get_username)s\n"
 
 #: account/templates/registration/password_reset_form.html:6
 msgid "Enter your e-mail address to obtain a new password"
-msgstr ""
+msgstr "Introduzca su correo electrónico para obtener una nueva contraseña"
 
 #: account/templates/registration/password_reset_form.html:9
 msgid "Send e-mail"
-msgstr ""
+msgstr "Mandar correo"
 
 #: account/templates/registration/register.html:3
 #: account/templates/registration/register.html:5
 msgid "Create an account"
-msgstr ""
+msgstr "Crear una cuenta"
 
 #: account/templates/registration/register.html:6
 msgid "Please, sign up using the following form"
-msgstr ""
+msgstr "Por favor, regístrese usando el siguiente formulario"
 
 #: account/templates/registration/register.html:10
 msgid "Create my account"
-msgstr ""
+msgstr "Crear mi cuenta"
 
 #: account/templates/registration/register_done.html:3
 msgid "Welcome"
-msgstr ""
+msgstr "Bienvenido"
 
 #: account/templates/registration/register_done.html:6
 #, python-format
@@ -296,35 +327,45 @@ msgid ""
 "            Welcome %(new_user.first_name)s!\n"
 "        "
 msgstr ""
+"\n"
+"Bienvenido %(new_user.first_name)s!"
 
 #: account/templates/registration/register_done.html:11
 msgid "Your account has been successfully created"
-msgstr ""
+msgstr "Su cuenta ha sido creada satisfactoriamente"
 
 #: account/templates/registration/register_done.html:12
 msgid "Now you can"
-msgstr ""
+msgstr "Ahora puede"
 
 #: account/templates/registration/register_done.html:12
 msgid "log in"
-msgstr ""
+msgstr "iniciar sesión"
+
+#: bank/settings.py:122
+msgid "English"
+msgstr "Inglés"
+
+#: bank/settings.py:123
+msgid "Spanish"
+msgstr "Español"
 
 #: bank_account/templates/bank_account/create.html:3
 #: bank_account/templates/bank_account/create.html:6
 msgid "Create bank account"
-msgstr ""
+msgstr "Crear una cuenta bancaria"
 
 #: bank_account/templates/bank_account/detail.html:6
 msgid "You can edit the"
-msgstr ""
+msgstr "Usted puede editar su"
 
 #: bank_account/templates/bank_account/detail.html:6
 msgid "bank account"
-msgstr ""
+msgstr "cuenta bancaria"
 
 #: bank_account/templates/bank_account/detail.html:7
 msgid "My cards"
-msgstr ""
+msgstr "Mis tarjetas"
 
 #: bank_account/templates/bank_account/done.html:4
 #: transaction/templates/transaction/done.html:4
@@ -334,38 +375,40 @@ msgid ""
 "        %(section.title)s - Done\n"
 "    "
 msgstr ""
+"\n"
+"%(section.title)s - Hecho"
 
 #: bank_account/templates/bank_account/done.html:9
 msgid "The account has been created successfully."
-msgstr ""
+msgstr "Su cuenta ha sido creada satisfactoriamente"
 
 #: bank_account/templates/bank_account/edit.html:3
 #: bank_account/templates/bank_account/edit.html:5
 msgid "Edit your bank account"
-msgstr ""
+msgstr "Edita su cuenta bancaria"
 
 #: bank_account/templates/bank_account/list.html:8
 #: bank_account/templates/bank_account/rich_bank_account.html:8
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #: bank_account/templates/bank_account/list.html:10
 #: bank_account/templates/bank_account/rich_bank_account.html:10
 msgid "Current Balance"
-msgstr ""
+msgstr "Balance"
 
 #: bank_account/templates/bank_account/list.html:13
 #: bank_account/templates/bank_account/rich_bank_account.html:13
 msgid "See Details"
-msgstr ""
+msgstr "Ver Detalles"
 
 #: bank_account/templates/bank_account/list.html:18
 msgid "There are no accounts yet"
-msgstr ""
+msgstr "No hay cuentas creadas aún"
 
 #: bank_account/templates/bank_account/rich_bank_account.html:18
 msgid "There are not bank accounts created yet"
-msgstr ""
+msgstr "No hay cuentas bancarias creadas aún"
 
 #: bank_account/templates/display_bank_account.html:4
 #: payment/templates/display_payment.html:4
@@ -379,178 +422,187 @@ msgid ""
 "        %(section.title)s\n"
 "    "
 msgstr ""
+"\n"
+" %(section.title)s"
 
 #: bank_account/templates/display_bank_account.html:9
 msgid "My bank accounts"
-msgstr ""
+msgstr "Mis cuentas bancarias"
 
 #: card/templates/card/create.html:3 card/templates/card/create.html:5
 msgid "Create Card"
-msgstr ""
+msgstr "Crear Tarjeta"
 
 #: card/templates/card/create.html:9 payment/templates/payment/created.html:13
 #: transaction/templates/transaction/created.html:14
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 #: card/templates/card/detail.html:7
 msgid "You can edit your"
-msgstr ""
+msgstr "Usted puede editar su"
 
 #: card/templates/card/detail.html:7
 msgid "card"
-msgstr ""
+msgstr "tarjeta"
 
 #: card/templates/card/done.html:3
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #: card/templates/card/done.html:5
 msgid "The card has been created successfully"
-msgstr ""
+msgstr "Su tarjeta ha sido creada satisfactoriamente"
 
 #: card/templates/card/edit.html:3 card/templates/card/edit.html:5
 msgid "Edit your card"
-msgstr ""
+msgstr "Edite su tarjeta"
 
 #: card/templates/card/list.html:27
 msgid "There are no cards created yet"
-msgstr ""
+msgstr "No hay tarjetas creadas aún"
 
 #: card/templates/card/most_used_card.html:27
 msgid "There are not cards created yet"
-msgstr ""
+msgstr "No hay tarjetas creadas aún"
 
 #: card/templates/display_card.html:3 card/templates/display_card.html:5
 msgid "My Cards"
-msgstr ""
+msgstr "Mis Tarjetas"
 
 #: payment/templates/display_payment.html:9
 msgid "My payments"
-msgstr ""
+msgstr "Mis Pagos"
 
 #: payment/templates/display_payment.html:12
 #: transaction/templates/display_transaction.html:12
 msgid "You can make a"
-msgstr ""
+msgstr "Usted puede hacer un"
 
 #: payment/templates/display_payment.html:12
 msgid "payment"
-msgstr ""
+msgstr "pago"
+
+#: payment/templates/display_payment.html:15
+#: transaction/templates/display_transaction.html:15
+#| msgid "You can edit your"
+msgid "You can download all your"
+msgstr "Usted puede descargar todos sus"
 
 #: payment/templates/pagination_payment.html:6
 #: transaction/templates/pagination_transaction.html:6
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: payment/templates/pagination_payment.html:23
 #: transaction/templates/pagination_transaction.html:23
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: payment/templates/payment/created.html:9
 msgid "Create a new payment"
-msgstr ""
+msgstr "Crear un nuevo pago"
 
 #: payment/templates/payment/done.html:9
 msgid "The payment has been made successfully"
-msgstr ""
+msgstr "El pago se ha realizado satisfactoriamente"
 
 #: payment/templates/payment/list.html:5
 msgid "Payment Summary"
-msgstr ""
+msgstr "Resumen de Pagos"
 
 #: payment/templates/payment/list.html:8
 msgid "Business"
-msgstr ""
+msgstr "Empresa"
 
 #: payment/templates/payment/list.html:9
 msgid "Card"
-msgstr ""
+msgstr "Tarjeta"
 
-#: payment/templates/payment/list.html:10 payment/templates/payment/pdf.html:14
+#: payment/templates/payment/list.html:10
+#: payment/templates/payment/pdf.html:14
 #: transaction/templates/transaction/list.html:11
 #: transaction/templates/transaction/pdf.html:15
 msgid "Amount"
-msgstr ""
+msgstr "Cantidad"
 
 #: payment/templates/payment/list.html:11
 #: transaction/templates/transaction/list.html:12
 msgid "Created"
-msgstr ""
+msgstr "Creado"
 
-#: payment/templates/payment/list.html:12
-#: transaction/templates/transaction/list.html:13
-msgid "Actions"
-msgstr ""
-
-#: payment/templates/payment/list.html:23
-msgid "Download "
-msgstr ""
+#: payment/templates/payment/list.html:24
+#: payment/templates/payment/list.html:27
+#: transaction/templates/transaction/list.html:26
+#: transaction/templates/transaction/list.html:29
+msgid "Download"
+msgstr "Descargar"
 
 #: payment/templates/payment/pdf.html:6
 msgid "Payment ID"
-msgstr ""
+msgstr "ID Pago"
 
 #: payment/templates/payment/pdf.html:11
 msgid "Payment Information"
-msgstr ""
+msgstr "Información del Pago"
 
 #: payment/templates/payment/pdf.html:13
 msgid "Card Number"
-msgstr ""
+msgstr "Número de Tarjeta"
 
 #: payment/templates/payment/pdf.html:16
 msgid "Payment Details"
-msgstr ""
+msgstr "Detalles del Pago"
 
 #: payment/templates/payment/pdf.html:20
 #: transaction/templates/transaction/list.html:10
 #: transaction/templates/transaction/pdf.html:21
 msgid "Concept"
-msgstr ""
+msgstr "Concepto"
 
 #: transaction/templates/display_transaction.html:10
 msgid "My transactions"
-msgstr ""
+msgstr "Mis transacciones"
 
 #: transaction/templates/display_transaction.html:12
 msgid "transaction"
-msgstr ""
+msgstr "transacción"
 
 #: transaction/templates/transaction/created.html:10
 msgid "Create a new transaction"
-msgstr ""
+msgstr "Crear una nueva transacción"
 
 #: transaction/templates/transaction/done.html:10
 msgid "The transaction has been made successfully"
-msgstr ""
+msgstr "Su transacción se ha realizado satisfactoriamente"
 
 #: transaction/templates/transaction/list.html:5
 msgid "Transactions Summary"
-msgstr ""
+msgstr "Resumen de las Transacciones"
 
 #: transaction/templates/transaction/list.html:8
 #: transaction/templates/transaction/pdf.html:13
 msgid "Sender"
-msgstr ""
-
-#: transaction/templates/transaction/list.html:25
-msgid "Download"
-msgstr ""
+msgstr "Remitente"
 
 #: transaction/templates/transaction/pdf.html:6
 msgid "Transaction ID"
-msgstr ""
+msgstr "ID Transacción"
 
 #: transaction/templates/transaction/pdf.html:11
 msgid "Sender Information"
-msgstr ""
+msgstr "Información del Remitente"
 
 #: transaction/templates/transaction/pdf.html:17
 msgid "Transaction Details"
-msgstr ""
+msgstr "Detalles de la Transacción"
 
 #: transaction/templates/transaction/pdf.html:22
 msgid "Kind"
-msgstr ""
+msgstr "Tipo"
+
+#~ msgid "Actions"
+#~ msgstr "Acciones"
+
+#~ msgid "Download "
+#~ msgstr "Descargar"

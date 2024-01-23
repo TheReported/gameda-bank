@@ -9,4 +9,5 @@ urlpatterns = [
     path('proccess/', views.payment_proccess, name='proccess'),
     path('<int:payment_id>/pdf/', views.payment_pdf, name='pdf'),
     path('<int:payment_id>/csv/', views.payment_csv, name='csv'),
+    path('csv/', views.all_payment_csv, name='all_csv'),
 ]

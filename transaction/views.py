@@ -161,6 +161,11 @@ def transaction_csv(request, transaction_id):
 
 
 def all_transaction_csv(request):
-    response = export_to_csv(request, Transaction.objects.filter(cac=request.user.id))
+    response = export_to_csv(
+        request,
+        queryset=Transaction.objects.filter(
+            account__user=request.user, kind=Transaction.Kind.OUTGOING
+        ),
+    )
 
     return response

@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
@@ -23,7 +24,7 @@ from account import views as acc_views
 from payment import views as payment_views
 from transaction import views as transaction_views
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('user/', include('account.urls')),
     path('', acc_views.show_main, name='main'),
@@ -31,7 +32,7 @@ urlpatterns = [
     path('transfer/incoming/', transaction_views.transaction_inconming_proccess, name='incoming'),
     path('rosetta/', include('rosetta.urls')),
     path('api/', include('bank.router', namespace='api')),
-]
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

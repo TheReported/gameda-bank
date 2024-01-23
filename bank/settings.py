@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
 from prettyconf import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -117,11 +118,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en'
 LANGUAGES = [
-    ('en', 'English'),
-    ('es', 'Spanish'),
+    ('en', _('English')),
+    ('es', _('Spanish')),
 ]
+
+LANGUAGE_CODE = 'en'
+
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True

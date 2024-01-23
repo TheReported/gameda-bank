@@ -130,3 +130,11 @@ def payment_csv(request, payment_id):
     response = export_to_csv(request, queryset=Payment.objects.filter(id=payment_id))
 
     return response
+
+
+def all_payment_csv(request):
+    response = export_to_csv(
+        request, queryset=Payment.objects.filter(ccc__bank_account__user=request.user)
+    )
+
+    return response
