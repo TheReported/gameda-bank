@@ -3,7 +3,6 @@ from decimal import Decimal
 
 import requests
 import weasyprint
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -149,7 +148,7 @@ def transaction_pdf(request, transaction_id):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=transaction_{transaction.id}.pdf'
     weasyprint.HTML(string=html).write_pdf(
-        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / 'css/pdf.css')]
+        response, stylesheets=[weasyprint.CSS('account/static/css/pdf.css')]
     )
     return response
 

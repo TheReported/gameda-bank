@@ -1,9 +1,15 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from transaction.api.serializers import TransactionSerializer
 from transaction.models import Transaction
 
 
 class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Transaction.objects.filter(
+            account__user=self.request.user, kind=Transaction.Kind.OUTGOING
+        )
