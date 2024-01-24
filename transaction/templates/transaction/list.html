@@ -10,8 +10,10 @@
                     <th scope="col">{% trans "Concept" %}</th>
                     <th scope="col">{% trans "Amount" %}</th>
                     <th scope="col">{% trans "Created" %}</th>
+                    <th scope="col">{% trans "Comission" %}</th>   
                     <th scope="col">PDF</th>
-                    <th scope="col">CSV</th>    
+                    <th scope="col">CSV</th>
+                     
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +24,7 @@
                         <td data-label="Concept">{{ transaction.concept|truncatewords:30 }}</td>
                         <td data-label="Amount">€{{ transaction.amount }}</td>
                         <td data-label="Created">{{ transaction.timeStamp }}</td>
+                        <td data-label="Comission">€{{ transaction.comission }}</td>
                         <td data-label="PDF">
                             <a href="{% url 'transaction:pdf' transaction.id %}" target="_blank">{% trans "Download" %} PDF</a>
                         </td>

@@ -1,6 +1,7 @@
 import csv
 import datetime
 
+from django.db import models
 from django.http import HttpResponse
 
 COMISSIONS = {
@@ -10,19 +11,17 @@ COMISSIONS = {
 }
 
 
-def apply_movement(acc_balance, amount, kind):
-    if kind in COMISSIONS:
-        if 0 <= amount < 50:
-            total_amount = amount + (amount * COMISSIONS[kind]["Tier1"] / 100)
-        elif 50 <= amount < 500:
-            total_amount = amount + (amount * COMISSIONS[kind]["Tier2"] / 100)
-        elif amount >= 500:
-            total_amount = amount + (amount * COMISSIONS[kind]["Tier3"] / 100)
+class MovementKind(models.TextChoices):
+    OUTGOING = 'OUT', 'Outgoing'
+    INCOMING = 'INC', 'Incoming'
+    PAYMENT = 'PAY', 'Payment'
 
-        if acc_balance >= total_amount:
-            total_balance = acc_balance - total_amount
-            return total_balance, True
-    return acc_balance, False
+
+def apply_movement(transaction, acc):
+    if acc.balance >= (total_amount := transaction.amount + transaction.comission):
+        acc.balance -= total_amount
+        return acc, True
+    return acc, False
 
 
 def export_to_csv(request, queryset):

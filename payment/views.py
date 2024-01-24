@@ -14,13 +14,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 from account.utils import Status
 from bank_account.models import BankAccount
-from bank_account.utils import apply_movement, export_to_csv
+from bank_account.utils import MovementKind, apply_movement, export_to_csv
 from card.models import Card
 
 from .forms import PaymentForm
 from .models import Payment
-
-PAYMENT_KIND = 'PAY'
 
 
 @csrf_exempt
@@ -33,7 +31,7 @@ def payment_curl_proccess(request):
             card.bank_account.balance, status = apply_movement(
                 card.bank_account.balance,
                 amount,
-                PAYMENT_KIND,
+                MovementKind.PAYMENT,
             )
             if status:
                 card.bank_account.save()
@@ -64,7 +62,7 @@ def payment_proccess(request):
                 )
 
                 bank_account.balance, status_movement = apply_movement(
-                    bank_account.balance, amount, PAYMENT_KIND
+                    bank_account.balance, amount, MovementKind.PAYMENT
                 )
                 if status_movement:
                     bank_account.save()

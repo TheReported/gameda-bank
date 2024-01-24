@@ -15,7 +15,7 @@ from django.views.decorators.http import require_POST
 
 from account.utils import Status, get_info_bank
 from bank_account.models import BankAccount
-from bank_account.utils import apply_movement, export_to_csv
+from bank_account.utils import MovementKind, apply_movement, export_to_csv
 
 from .forms import TransactionForm
 from .models import Transaction
@@ -44,12 +44,11 @@ def transaction_outgoing_proccess(request):
             if sender and cac:
                 if amount <= sender.balance:
                     transaction = transaction_form.save(commit=False)
-                    sender.balance, status_movement = apply_movement(
-                        sender.balance, amount, transaction.kind
-                    )
+                    transaction.amount = amount
+                    sender, status_movement = apply_movement(sender, transaction)
                     if status_movement:
                         cac.balance += amount
-                        transaction.user = request.user
+                        transaction.account = sender
                         sender.save()
                         cac.save()
                         transaction.save()
@@ -104,7 +103,7 @@ def transaction_inconming_proccess(request):
         cac=bank_account,
         concept=data['concept'],
         amount=amount,
-        kind=Transaction.Kind.INCOMING,
+        kind=MovementKind.INCOMING,
     )
     transaction.save()
     return HttpResponse()
