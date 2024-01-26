@@ -1,6 +1,9 @@
 from django.db import models
 
+from bank_account.utils import COMISSIONS
 from card.models import Card
+
+PAYMENT_KIND = 'PAY'
 
 
 class Payment(models.Model):
@@ -12,6 +15,15 @@ class Payment(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+    @property
+    def commission(self):
+        if 0 <= self.amount < 50:
+            return self.amount * COMISSIONS[PAYMENT_KIND]["Tier1"] / 100
+        elif 50 <= self.amount < 500:
+            return self.amount * COMISSIONS[PAYMENT_KIND]["Tier2"] / 100
+        elif self.amount >= 500:
+            return self.amount * COMISSIONS[PAYMENT_KIND]["Tier3"] / 100
 
     def __str__(self):
         return self.business

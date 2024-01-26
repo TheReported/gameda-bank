@@ -724,3 +724,14 @@ footer {
 .pagination-3 .active a {
     color: white;
 }
+
+
+/* table transaction payment  kinds*/
+
+.text-success {
+    color: #0ac33e;
+}
+
+.text-danger {
+    color:rgb(187, 21, 21);
+}

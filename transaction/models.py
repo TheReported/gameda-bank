@@ -19,7 +19,7 @@ class Transaction(models.Model):
         ordering = ['-timeStamp']
 
     @property
-    def comission(self):
+    def commission(self):
         if 0 <= self.amount < 50:
             return self.amount * COMISSIONS[self.kind]["Tier1"] / 100
         elif 50 <= self.amount < 500:

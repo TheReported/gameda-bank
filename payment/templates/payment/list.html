@@ -9,6 +9,7 @@
                     <th scope="col">{% trans "Card" %}</th>
                     <th scope="col">{% trans "Amount" %}</th>
                     <th scope="col">{% trans "Created" %}</th>
+                    <th scope="col">{% trans "Commission" %}</th>
                     <th scope="col">PDF</th>
                     <th scope="col">CSV</th>  
                 </tr>
@@ -18,8 +19,9 @@
                     <tr>
                         <td data-label="Business">{{ payment.business }}</td>
                         <td data-label="Card">{{ payment.ccc }}</td>
-                        <td data-label="Amount">€{{ payment.amount }}</td>
+                        <td data-label="Amount" class="text-danger">€{{ payment.amount }}</td>
                         <td data-label="Created">{{ payment.created }}</td>
+                        <td data-label="Commission">€{{ payment.commission }}</td>
                         <td data-label="PDF">
                             <a href="{% url 'payment:pdf' payment.id %}" target="_blank">{% trans "Download" %} PDF</a>
                         </td>

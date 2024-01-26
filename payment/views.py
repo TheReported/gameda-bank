@@ -119,7 +119,7 @@ def payment_pdf(request, payment_id):
     response = HttpResponse(content_type='payment/pdf')
     response['Content-Disposition'] = f'filename=payment_{payment.id}.pdf'
     weasyprint.HTML(string=html).write_pdf(
-        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / 'css/pdf.css')]
+        response, stylesheets=[weasyprint.CSS('account/static/css/pdf.css')]
     )
     return response
 

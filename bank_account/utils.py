@@ -18,7 +18,7 @@ class MovementKind(models.TextChoices):
 
 
 def apply_movement(transaction, acc):
-    if acc.balance >= (total_amount := transaction.amount + transaction.comission):
+    if acc.balance >= (total_amount := transaction.amount + transaction.commission):
         acc.balance -= total_amount
         return acc, True
     return acc, False
