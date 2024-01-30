@@ -58,16 +58,13 @@ def transaction_outgoing_proccess(request):
                         messages.error(request, 'You dont have enough money')
             else:
                 bank = get_info_bank(cd['cac'])
-                response = requests.post(
-                    f'{bank["url"]}:8000/transfer/incoming/', json=request.POST
-                )
+                response = requests.post(f'{bank["url"]}/transfer/incoming/', json=request.POST)
                 if response.status_code == 200:
                     transaction = transaction_form.save(commit=False)
-                    sender.balance, status_movement = apply_movement(
-                        sender.balance, cd['amount'], transaction.kind
-                    )
+                    sender, status_movement = apply_movement(transaction, sender)
                     if status_movement:
                         sender.save()
+                        transaction.account = sender
                         transaction.save()
                         messages.success(request, "Your payment has been done successfully")
                         return redirect('transaction:done')
