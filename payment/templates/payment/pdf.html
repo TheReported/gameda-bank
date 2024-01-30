@@ -1,7 +1,9 @@
 {% load i18n %}
+{% load static %}
 <html>
 <body>
   <h1>Gameda Bank</h1>
+  <img src="{% static 'img/logo.png' %}" alt="" class="logo-pdf">
   <p>
     {% trans "Payment ID" %}: {{ payment.id }}<br>
     <span class="secondary">
