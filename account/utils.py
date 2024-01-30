@@ -14,7 +14,7 @@ class Status(models.TextChoices):
 
 
 def get_info_bank(account_code):
-    url = 'https://raw.githubusercontent.com/sdelquin/dsw/main/ut3/te1/files/banks.json'
+    url = 'https://raw.githubusercontent.com/sdelquin/dsw/main/ut3/te1/notes/files/banks.json'
     response = requests.get(url)
     banks = response.json()
     account_code = int(account_code[1])

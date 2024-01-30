@@ -45,7 +45,7 @@ def transaction_outgoing_proccess(request):
                 if amount <= sender.balance:
                     transaction = transaction_form.save(commit=False)
                     transaction.amount = amount
-                    sender, status_movement = apply_movement(sender, transaction)
+                    sender, status_movement = apply_movement(transaction, sender)
                     if status_movement:
                         cac.balance += amount
                         transaction.account = sender
