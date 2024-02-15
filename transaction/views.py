@@ -24,7 +24,7 @@ from .models import Transaction
 @login_required
 def transaction_outgoing_proccess(request):
     if request.method == 'POST':
-        transaction_form = TransactionForm(request.POST)
+        transaction_form = TransactionForm(request.user, request.POST)
         if transaction_form.is_valid():
             cd = transaction_form.cleaned_data
             cac = cd['cac']
@@ -72,7 +72,7 @@ def transaction_outgoing_proccess(request):
         else:
             messages.error(request, "There was an error on your transaction")
     else:
-        transaction_form = TransactionForm()
+        transaction_form = TransactionForm(request.user)
     return render(
         request,
         'transaction/created.html',

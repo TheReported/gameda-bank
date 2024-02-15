@@ -2,7 +2,6 @@ import json
 from decimal import Decimal
 
 import weasyprint
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password

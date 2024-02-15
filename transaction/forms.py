@@ -1,21 +1,21 @@
-import re
-
 from django import forms
 
-from .models import Transaction
+from account.utils import Status
 
-REGEX = r'A\d-\d{4}'
+from .models import BankAccount, Transaction
 
 
 class TransactionForm(forms.ModelForm):
+    sender = forms.ModelChoiceField(queryset=None)
     cac = forms.CharField(max_length=7)
 
     class Meta:
         model = Transaction
         fields = ['sender', 'cac', 'concept', 'amount']
 
-    def clean_sender(self):
-        cd = self.cleaned_data
-        if re.match(REGEX, cd['sender']):
-            return cd['sender']
-        raise forms.ValidationError('Sender error')
+    # Esta linea asegura que al crear una instancia del formulario TransactionForm el campo sender
+    # mostrará solo las cuentas bancarias asociadas con el usuario y que estén activas.
+
+    def __init__(self, user, *args, **kwargs):
+        super(TransactionForm, self).__init__(*args, **kwargs)
+        self.fields['sender'].queryset = BankAccount.objects.filter(user=user, status=Status.ACTIVE)
