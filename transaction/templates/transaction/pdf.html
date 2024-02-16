@@ -22,14 +22,12 @@
       <tr>
         <th>{% trans "Concept" %}</th>
         <th>{% trans "Commissions" %}</th>
-        <th>{% trans "Kind" %}</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>{{ transaction.concept }}</td>
         <td>{{ transaction.commission }}</td>
-        <td>{{ transaction.get_kind_display }}</td>
       </tr>
     </tbody>
   </table>

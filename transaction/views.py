@@ -67,7 +67,6 @@ def transaction_outgoing_proccess(request):
                         messages.success(request, "Your payment has been done successfully")
                         return redirect('transaction:done')
                     messages.error(request, "There was an error on your transaction")
-
                 return HttpResponseBadRequest()
         else:
             messages.error(request, "There was an error on your transaction")
