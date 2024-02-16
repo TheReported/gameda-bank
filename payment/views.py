@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from account.utils import Status
 from bank_account.models import BankAccount
-from bank_account.utils import MovementKind, apply_movement, export_to_csv
+from bank_account.utils import apply_movement, export_to_csv
 from card.models import Card
 
 from .forms import PaymentForm
@@ -26,20 +26,16 @@ def payment_curl_proccess(request):
     amount = Decimal(data.get('amount'))
     try:
         card = Card.active.get(code=data['ccc'])
+        payment = Payment(
+            business=data['business'],
+            ccc=card,
+            pin=card.pin,
+            amount=amount,
+        )
         if card and check_password(data['pin'], card.pin):
-            card.bank_account.balance, status = apply_movement(
-                card.bank_account.balance,
-                amount,
-                MovementKind.PAYMENT,
-            )
+            card.bank_account, status = apply_movement(payment, card.bank_account)
             if status:
                 card.bank_account.save()
-                payment = Payment(
-                    business=data['business'],
-                    ccc=card,
-                    pin=card.pin,
-                    amount=amount,
-                )
                 payment.save()
                 return HttpResponse('200 OK\n')
     except Card.DoesNotExist:
@@ -60,12 +56,12 @@ def payment_proccess(request):
                     BankAccount, code=card.bank_account, status=Status.ACTIVE
                 )
 
-                bank_account.balance, status_movement = apply_movement(
-                    bank_account.balance, amount, MovementKind.PAYMENT
-                )
+                payment = payment_form.save(commit=False)
+                payment.amount = amount
+                bank_account, status_movement = apply_movement(payment, bank_account)
                 if status_movement:
                     bank_account.save()
-                    payment = payment_form.save(commit=False)
+
                     payment.ccc = card
                     payment.save()
                     messages.success(request, "Your payment has been done successfully")

@@ -17,8 +17,8 @@ class MovementKind(models.TextChoices):
     PAYMENT = 'PAY', 'Payment'
 
 
-def apply_movement(transaction, acc):
-    if acc.balance >= (total_amount := transaction.amount + transaction.commission):
+def apply_movement(movement, acc):
+    if acc.balance >= (total_amount := movement.amount + movement.commission):
         acc.balance -= total_amount
         return acc, True
     return acc, False

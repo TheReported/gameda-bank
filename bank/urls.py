@@ -29,13 +29,13 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('user/', include('account.urls')),
     path('', acc_views.show_main, name='main'),
-    path('payment/', payment_views.payment_curl_proccess, name='payment_curl_proccess'),
     path('rosetta/', include('rosetta.urls')),
 )
 
 urlpatterns += [
     path('api/', include('bank.router', namespace='api')),
     path('transfer/incoming/', transaction_views.transaction_inconming_proccess, name='incoming'),
+    path('payment/', payment_views.payment_curl_proccess, name='payment_curl_proccess'),
 ]
 
 if settings.DEBUG:
