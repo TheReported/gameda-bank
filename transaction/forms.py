@@ -7,7 +7,6 @@ from .models import BankAccount, Transaction
 
 class TransactionForm(forms.ModelForm):
     sender = forms.ModelChoiceField(queryset=None)
-    cac = forms.CharField(max_length=7)
 
     class Meta:
         model = Transaction

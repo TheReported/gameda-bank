@@ -37,7 +37,7 @@ def display_card(request):
 @login_required
 def create(request):
     if request.method == 'POST':
-        card_form = CardForm(request.POST)
+        card_form = CardForm(request.user, request.POST)
         if card_form.is_valid():
             cd = card_form.cleaned_data
             bank_account = get_object_or_404(
@@ -59,7 +59,7 @@ def create(request):
         else:
             messages.error(request, "There has been an error creating your card")
     else:
-        card_form = CardForm()
+        card_form = CardForm(request.user)
     return render(request, "card/create.html", {'section': 'cards', "card_form": card_form})
 
 
@@ -76,7 +76,7 @@ def create_done(request):
 def edit(request, code):
     card = get_object_or_404(Card, code=code, bank_account__user=request.user, status=Status.ACTIVE)
     if request.method == 'POST':
-        card_edit_form = CardEditForm(instance=card, data=request.POST)
+        card_edit_form = CardEditForm(user=request.user, instance=card, data=request.POST)
         if card_edit_form.is_valid():
             cd = card_edit_form.cleaned_data
             bank_account = get_object_or_404(
@@ -89,7 +89,7 @@ def edit(request, code):
             return redirect(card.get_absolute_url())
         messages.error(request, 'There has been an error editing your card.')
     else:
-        card_edit_form = CardEditForm(instance=card)
+        card_edit_form = CardEditForm(user=request.user, instance=card)
     return render(
         request,
         'card/edit.html',

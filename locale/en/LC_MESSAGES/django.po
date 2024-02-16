@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-22 16:24+0000\n"
+"POT-Creation-Date: 2024-02-16 15:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,6 @@ msgstr ""
 
 #: account/templates/account/edit.html:20
 #: bank_account/templates/bank_account/edit.html:13
-#: card/templates/card/edit.html:13
 msgid "Discharge account"
 msgstr ""
 
@@ -133,15 +132,15 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: account/templates/header.html:43
+#: account/templates/header.html:45
 msgid "Hello"
 msgstr ""
 
-#: account/templates/header.html:47
+#: account/templates/header.html:48
 msgid "Logout"
 msgstr ""
 
-#: account/templates/header.html:49
+#: account/templates/header.html:50
 msgid "Login"
 msgstr ""
 
@@ -426,6 +425,10 @@ msgstr ""
 msgid "Edit your card"
 msgstr ""
 
+#: card/templates/card/edit.html:13
+msgid "Discharge card"
+msgstr ""
+
 #: card/templates/card/list.html:27
 msgid "There are no cards created yet"
 msgstr ""
@@ -478,7 +481,7 @@ msgstr ""
 msgid "Payment Summary"
 msgstr ""
 
-#: payment/templates/payment/list.html:8
+#: payment/templates/payment/list.html:8 payment/templates/payment/pdf.html:22
 msgid "Business"
 msgstr ""
 
@@ -486,9 +489,9 @@ msgstr ""
 msgid "Card"
 msgstr ""
 
-#: payment/templates/payment/list.html:10 payment/templates/payment/pdf.html:14
+#: payment/templates/payment/list.html:10 payment/templates/payment/pdf.html:16
 #: transaction/templates/transaction/list.html:11
-#: transaction/templates/transaction/pdf.html:15
+#: transaction/templates/transaction/pdf.html:17
 msgid "Amount"
 msgstr ""
 
@@ -497,33 +500,32 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: payment/templates/payment/list.html:24
-#: payment/templates/payment/list.html:27
-#: transaction/templates/transaction/list.html:26
+#: payment/templates/payment/list.html:12 payment/templates/payment/pdf.html:23
+#: transaction/templates/transaction/list.html:13
+msgid "Commission"
+msgstr ""
+
+#: payment/templates/payment/list.html:26
+#: payment/templates/payment/list.html:29
 #: transaction/templates/transaction/list.html:29
+#: transaction/templates/transaction/list.html:32
 msgid "Download"
 msgstr ""
 
-#: payment/templates/payment/pdf.html:6
+#: payment/templates/payment/pdf.html:8
 msgid "Payment ID"
 msgstr ""
 
-#: payment/templates/payment/pdf.html:11
+#: payment/templates/payment/pdf.html:13
 msgid "Payment Information"
 msgstr ""
 
-#: payment/templates/payment/pdf.html:13
+#: payment/templates/payment/pdf.html:15
 msgid "Card Number"
 msgstr ""
 
-#: payment/templates/payment/pdf.html:16
+#: payment/templates/payment/pdf.html:18
 msgid "Payment Details"
-msgstr ""
-
-#: payment/templates/payment/pdf.html:20
-#: transaction/templates/transaction/list.html:10
-#: transaction/templates/transaction/pdf.html:21
-msgid "Concept"
 msgstr ""
 
 #: transaction/templates/display_transaction.html:10
@@ -547,22 +549,31 @@ msgid "Transactions Summary"
 msgstr ""
 
 #: transaction/templates/transaction/list.html:8
-#: transaction/templates/transaction/pdf.html:13
+#: transaction/templates/transaction/pdf.html:15
 msgid "Sender"
 msgstr ""
 
-#: transaction/templates/transaction/pdf.html:6
+#: transaction/templates/transaction/list.html:10
+#: transaction/templates/transaction/pdf.html:23
+msgid "Concept"
+msgstr ""
+
+#: transaction/templates/transaction/pdf.html:8
 msgid "Transaction ID"
 msgstr ""
 
-#: transaction/templates/transaction/pdf.html:11
+#: transaction/templates/transaction/pdf.html:13
 msgid "Sender Information"
 msgstr ""
 
-#: transaction/templates/transaction/pdf.html:17
+#: transaction/templates/transaction/pdf.html:19
 msgid "Transaction Details"
 msgstr ""
 
-#: transaction/templates/transaction/pdf.html:22
+#: transaction/templates/transaction/pdf.html:24
+msgid "Commissions"
+msgstr ""
+
+#: transaction/templates/transaction/pdf.html:25
 msgid "Kind"
 msgstr ""

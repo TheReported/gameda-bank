@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-22 16:24+0000\n"
-"PO-Revision-Date: 2024-01-22 16:30+0000\n"
+"POT-Creation-Date: 2024-02-16 15:43+0000\n"
+"PO-Revision-Date: 2024-02-16 15:44+0000\n"
 "Last-Translator:   <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -54,7 +54,6 @@ msgstr "Guardar cambios"
 
 #: account/templates/account/edit.html:20
 #: bank_account/templates/bank_account/edit.html:13
-#: card/templates/card/edit.html:13
 msgid "Discharge account"
 msgstr "Cerrar cuenta"
 
@@ -147,15 +146,15 @@ msgstr "Pagos"
 msgid "Language"
 msgstr "Idioma"
 
-#: account/templates/header.html:43
+#: account/templates/header.html:45
 msgid "Hello"
 msgstr "Hola"
 
-#: account/templates/header.html:47
+#: account/templates/header.html:48
 msgid "Logout"
 msgstr "Cerrar Sesión"
 
-#: account/templates/header.html:49
+#: account/templates/header.html:50
 msgid "Login"
 msgstr "Iniciar Sesión"
 
@@ -458,6 +457,11 @@ msgstr "Su tarjeta ha sido creada satisfactoriamente"
 msgid "Edit your card"
 msgstr "Edite su tarjeta"
 
+#: card/templates/card/edit.html:13
+#| msgid "Discharge account"
+msgid "Discharge card"
+msgstr "Borrar tarjeta"
+
 #: card/templates/card/list.html:27
 msgid "There are no cards created yet"
 msgstr "No hay tarjetas creadas aún"
@@ -485,7 +489,6 @@ msgstr "pago"
 
 #: payment/templates/display_payment.html:15
 #: transaction/templates/display_transaction.html:15
-#| msgid "You can edit your"
 msgid "You can download all your"
 msgstr "Usted puede descargar todos sus"
 
@@ -511,7 +514,7 @@ msgstr "El pago se ha realizado satisfactoriamente"
 msgid "Payment Summary"
 msgstr "Resumen de Pagos"
 
-#: payment/templates/payment/list.html:8
+#: payment/templates/payment/list.html:8 payment/templates/payment/pdf.html:22
 msgid "Business"
 msgstr "Empresa"
 
@@ -520,9 +523,9 @@ msgid "Card"
 msgstr "Tarjeta"
 
 #: payment/templates/payment/list.html:10
-#: payment/templates/payment/pdf.html:14
+#: payment/templates/payment/pdf.html:16
 #: transaction/templates/transaction/list.html:11
-#: transaction/templates/transaction/pdf.html:15
+#: transaction/templates/transaction/pdf.html:17
 msgid "Amount"
 msgstr "Cantidad"
 
@@ -531,34 +534,34 @@ msgstr "Cantidad"
 msgid "Created"
 msgstr "Creado"
 
-#: payment/templates/payment/list.html:24
-#: payment/templates/payment/list.html:27
-#: transaction/templates/transaction/list.html:26
+#: payment/templates/payment/list.html:12
+#: payment/templates/payment/pdf.html:23
+#: transaction/templates/transaction/list.html:13
+msgid "Commission"
+msgstr "Comisión"
+
+#: payment/templates/payment/list.html:26
+#: payment/templates/payment/list.html:29
 #: transaction/templates/transaction/list.html:29
+#: transaction/templates/transaction/list.html:32
 msgid "Download"
 msgstr "Descargar"
 
-#: payment/templates/payment/pdf.html:6
+#: payment/templates/payment/pdf.html:8
 msgid "Payment ID"
 msgstr "ID Pago"
 
-#: payment/templates/payment/pdf.html:11
+#: payment/templates/payment/pdf.html:13
 msgid "Payment Information"
 msgstr "Información del Pago"
 
-#: payment/templates/payment/pdf.html:13
+#: payment/templates/payment/pdf.html:15
 msgid "Card Number"
 msgstr "Número de Tarjeta"
 
-#: payment/templates/payment/pdf.html:16
+#: payment/templates/payment/pdf.html:18
 msgid "Payment Details"
 msgstr "Detalles del Pago"
-
-#: payment/templates/payment/pdf.html:20
-#: transaction/templates/transaction/list.html:10
-#: transaction/templates/transaction/pdf.html:21
-msgid "Concept"
-msgstr "Concepto"
 
 #: transaction/templates/display_transaction.html:10
 msgid "My transactions"
@@ -581,23 +584,33 @@ msgid "Transactions Summary"
 msgstr "Resumen de las Transacciones"
 
 #: transaction/templates/transaction/list.html:8
-#: transaction/templates/transaction/pdf.html:13
+#: transaction/templates/transaction/pdf.html:15
 msgid "Sender"
 msgstr "Remitente"
 
-#: transaction/templates/transaction/pdf.html:6
+#: transaction/templates/transaction/list.html:10
+#: transaction/templates/transaction/pdf.html:23
+msgid "Concept"
+msgstr "Concepto"
+
+#: transaction/templates/transaction/pdf.html:8
 msgid "Transaction ID"
 msgstr "ID Transacción"
 
-#: transaction/templates/transaction/pdf.html:11
+#: transaction/templates/transaction/pdf.html:13
 msgid "Sender Information"
 msgstr "Información del Remitente"
 
-#: transaction/templates/transaction/pdf.html:17
+#: transaction/templates/transaction/pdf.html:19
 msgid "Transaction Details"
 msgstr "Detalles de la Transacción"
 
-#: transaction/templates/transaction/pdf.html:22
+#: transaction/templates/transaction/pdf.html:24
+#| msgid "Almost no commissions"
+msgid "Commissions"
+msgstr "Comisiones"
+
+#: transaction/templates/transaction/pdf.html:25
 msgid "Kind"
 msgstr "Tipo"
 

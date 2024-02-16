@@ -50,7 +50,7 @@ def payment_curl_proccess(request):
 @login_required
 def payment_proccess(request):
     if request.method == 'POST':
-        payment_form = PaymentForm(request.POST)
+        payment_form = PaymentForm(request.user, request.POST)
         if payment_form.is_valid():
             cd = payment_form.cleaned_data
             amount = Decimal(cd['amount'])
@@ -77,7 +77,7 @@ def payment_proccess(request):
         else:
             messages.error(request, "There was an error on your payment")
     else:
-        payment_form = PaymentForm()
+        payment_form = PaymentForm(request.user)
     return render(
         request,
         'payment/created.html',

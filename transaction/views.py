@@ -29,9 +29,7 @@ def transaction_outgoing_proccess(request):
             cd = transaction_form.cleaned_data
             cac = cd['cac']
             amount = Decimal(cd['amount'])
-            sender = get_object_or_404(
-                BankAccount, code=cd['sender'], user=request.user, status=Status.ACTIVE
-            )
+            sender = BankAccount.active.get(code=cd['sender'])
 
             cac = (
                 get_object_or_404(BankAccount, code=cd['cac'], status=Status.ACTIVE)
@@ -68,6 +66,8 @@ def transaction_outgoing_proccess(request):
                         transaction.save()
                         messages.success(request, "Your payment has been done successfully")
                         return redirect('transaction:done')
+                    messages.error(request, "There was an error on your transaction")
+
                 return HttpResponseBadRequest()
         else:
             messages.error(request, "There was an error on your transaction")
@@ -96,6 +96,7 @@ def transaction_inconming_proccess(request):
     bank_account.balance += amount
     bank_account.save()
     transaction = Transaction(
+        account=bank_account,
         sender=data['sender'],
         cac=bank_account,
         concept=data['concept'],

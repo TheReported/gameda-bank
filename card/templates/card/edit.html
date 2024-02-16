@@ -10,7 +10,7 @@
     </form>
     <form action="{% url "card:discharge" card.code %}" method="post">
         {% csrf_token %}
-        <p><button type="submit">{% trans "Discharge account" %}</button></p>
+        <p><button type="submit">{% trans "Discharge card" %}</button></p>
     </form>
 
 {% endblock %}

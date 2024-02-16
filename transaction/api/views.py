@@ -14,6 +14,4 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
     http_method_names = ['get']
 
     def get_queryset(self):
-        return Transaction.objects.filter(
-            account__user=self.request.user, kind=MovementKind.OUTGOING
-        )
+        return Transaction.objects.filter(account__user=self.request.user)
