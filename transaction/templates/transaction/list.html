@@ -22,9 +22,9 @@
                         <td data-label="Sender">{{ transaction.sender }}</td>
                         <td data-label="CAC">{{ transaction.cac }}</td>
                         <td data-label="Concept">{{ transaction.concept|truncatewords:30 }}</td>
-                        <td data-label="Amount" class="{% if transaction.account.user == request.user %}text-danger{% else %} text-success{% endif%}">€{{ transaction.amount }}</td>
+                        <td data-label="Amount" class="{% if transaction.account.user == request.user %}text-danger{% else %} text-success{% endif%}">{{ transaction.amount }}€</td>
                         <td data-label="Created">{{ transaction.timeStamp }}</td>
-                        <td data-label="Commission">€{{ transaction.commission }}</td>
+                        <td data-label="Commission">{{ transaction.commission }}€</td>
                         <td data-label="PDF">
                             <a href="{% url 'transaction:pdf' transaction.id %}" target="_blank">{% trans "Download" %} PDF</a>
                         </td>
