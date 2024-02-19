@@ -13,4 +13,4 @@ class CardViewSet(viewsets.ReadOnlyModelViewSet):
     http_method_names = ['get']
 
     def get_queryset(self):
-        return Card.objects.filter(bank_account__user=self.request.user)
+        return Card.active.filter(bank_account__user=self.request.user)

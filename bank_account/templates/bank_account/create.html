@@ -5,8 +5,9 @@
     
     <h2>{% trans "Create bank account" %}</h2>
     <form action="{% url "bank_account:create" %}" method="post">
-        {{ bank_account_form.as_p }}
         {% csrf_token %}
+        {{ bank_account_form.as_p}}
+
         <p><input type="submit" value="Create"></p>
     </form>
 {% endblock %}
