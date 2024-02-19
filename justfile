@@ -32,3 +32,6 @@ zip: clean
 
 dockup:
     docker compose up
+
+dockdown:
+    docker compose down
