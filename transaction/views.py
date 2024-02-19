@@ -3,6 +3,7 @@ from decimal import Decimal
 
 import requests
 import weasyprint
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -47,6 +48,7 @@ def transaction_outgoing_proccess(request):
                     if status_movement:
                         cac.balance += amount
                         transaction.account = sender
+                        transaction.cac = cac
                         sender.save()
                         cac.save()
                         transaction.save()
@@ -97,7 +99,7 @@ def transaction_inconming_proccess(request):
     transaction = Transaction(
         account=bank_account,
         sender=data['sender'],
-        cac=bank_account,
+        cac=bank_account.code,
         concept=data['concept'],
         amount=amount,
         kind=MovementKind.INCOMING,
@@ -144,7 +146,7 @@ def transaction_pdf(request, transaction_id):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=transaction_{transaction.id}.pdf'
     weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
-        response, stylesheets=[weasyprint.CSS('account/static/css/pdf.css')]
+        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / 'css/pdf.css')]
     )
     return response
 
@@ -156,11 +158,14 @@ def transaction_csv(request, transaction_id):
 
 
 def all_transaction_csv(request):
+    accounts = request.user.accounts.all()
+    queryset = Transaction.objects.filter(
+        Q(sender__in=accounts.values_list('code', flat=True))
+        | Q(cac__in=accounts.values_list('code', flat=True))
+    )
     response = export_to_csv(
         request,
-        queryset=Transaction.objects.filter(
-            account__user=request.user, kind=Transaction.Kind.OUTGOING
-        ),
+        queryset=queryset,
     )
 
     return response

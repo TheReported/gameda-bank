@@ -1,8 +1,8 @@
+from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from bank_account.utils import MovementKind
 from transaction.api.serializers import TransactionSerializer
 from transaction.models import Transaction
 
@@ -14,4 +14,8 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
     http_method_names = ['get']
 
     def get_queryset(self):
-        return Transaction.objects.filter(account__user=self.request.user)
+        transactions = []
+        for account in self.request.user.accounts.all():
+            movement = Transaction.objects.filter(Q(sender=account.code) | Q(cac=account.code))
+            transactions.extend(movement)
+        return transactions

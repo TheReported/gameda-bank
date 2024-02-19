@@ -10,6 +10,8 @@ COMISSIONS = {
     "PAY": {"Tier1": 3, "Tier2": 5, "Tier3": 7},
 }
 
+RESTRICT_FIELDS = ['pin', 'kind']
+
 
 class MovementKind(models.TextChoices):
     OUTGOING = 'OUT', 'Outgoing'
@@ -31,7 +33,9 @@ def export_to_csv(request, queryset):
     response['Content-Disposition'] = content_disposition
     writer = csv.writer(response)
     fields = [
-        field for field in opts.get_fields() if not field.many_to_many and not field.one_to_many
+        field
+        for field in opts.get_fields()
+        if not field.many_to_many and not field.one_to_many and field.name not in RESTRICT_FIELDS
     ]
     writer.writerow([field.verbose_name for field in fields])
     for obj in queryset:
